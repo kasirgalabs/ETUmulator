@@ -16,7 +16,7 @@
       <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
       <a href="{{ "/" | relative_url }}" class="btn">Home</a>
       <a href="https://github.com/kasirgalabs/ETUmulator/releases/download/0.5.0/ETUmulator-0.5.0.jar" class="btn">Download .jar</a>
-      <a href="user_guide" class="btn">User Guide</a>
+      <a href="{{ "/user_guide" | relative_url }}" class="btn">User Guide</a>
       <a href="{{ site.github.releases_url }}" class="btn">Releases</a>
       {% if site.github.is_project_page %}
         <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
