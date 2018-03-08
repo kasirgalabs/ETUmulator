@@ -44,7 +44,7 @@ import javafx.stage.WindowEvent;
 
 public class ETUmulator extends Application {
     @Inject
-    private FileMenuController fileMenuController;
+    public FileMenuController fileMenuController;
     @Inject
     private GUISafeProcessor processor;
 

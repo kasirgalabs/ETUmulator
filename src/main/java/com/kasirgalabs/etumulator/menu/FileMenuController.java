@@ -32,7 +32,7 @@ public class FileMenuController {
     public final FileChooser fileChooser;
     public Window window;
     public int lengthStart;
-    public static int son=0; //for start length
+    public static int son; //for start length
     
     @Inject
     public FileMenuController(Document document) {
@@ -64,7 +64,8 @@ public class FileMenuController {
                 while((line = bf.readLine()) != null) {
                     text.append(line).append('\n');
                 }
-            }        
+            }  
+            son=0;
             document.setText(text.toString());
             document.setTargetFile(file);    
            lengthStart=document.getText().length();
