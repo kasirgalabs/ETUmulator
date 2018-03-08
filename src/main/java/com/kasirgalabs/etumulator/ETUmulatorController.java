@@ -39,7 +39,7 @@ public class ETUmulatorController {
     private Memory memory;
 
     @FXML
-    private void runButtonOnAction(ActionEvent event) {
+    private void runButtonOnAction(ActionEvent event){
         processor.stop();
         processorUnits.reset();
         Assembler assembler = new Assembler(memory);
