@@ -32,7 +32,7 @@ public class FileMenuController {
     public final FileChooser fileChooser;
     public Window window;
     public int lengthStart;
-    static int son=0;
+    public static int son=0; //for start length
     
     @Inject
     public FileMenuController(Document document) {

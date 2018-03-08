@@ -16,7 +16,6 @@
  */
 package com.kasirgalabs.etumulator;
 
-import static java.awt.SystemColor.window;
 import static javafx.application.Application.launch;
 
 import com.google.inject.Guice;
@@ -31,7 +30,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -39,19 +37,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-	import javafx.scene.Scene;
-	import javafx.scene.control.Alert;
-	import javafx.scene.control.Alert.AlertType;
-	import javafx.scene.control.Button;
-	import javafx.scene.control.Label;
-	import javafx.scene.control.TextField;
-	import javafx.scene.layout.StackPane;
-	import javafx.scene.layout.VBox;
-	import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class ETUmulator extends Application {
     @Inject
@@ -86,7 +75,7 @@ public class ETUmulator extends Application {
                 processor.stop();
             }
         });      
-        primaryStage.setOnCloseRequest((event) -> {
+        primaryStage.setOnCloseRequest((WindowEvent event) -> {
             int firstOne=fileMenuController.getLength();
             int lastOne=fileMenuController.document.getText().length();
             
@@ -151,7 +140,7 @@ public class ETUmulator extends Application {
              btnSave.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override
 	            public void handle(ActionEvent event) {
-                    try {
+                    
                         File file = fileMenuController.fileChooser.showSaveDialog(fileMenuController.window);
         if(file == null) {
             return;
@@ -164,11 +153,8 @@ public class ETUmulator extends Application {
                 }
                     primaryStage.close();
 	                stage.close();
-                    } catch(Exception ex) {
-                        Logger.getLogger(ETUmulator.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-	      }
-	        });
+                }
+             });
             box.getChildren().add(label);
             box.getChildren().add(btnSave);
 	        box.getChildren().add(btnExit);
