@@ -65,7 +65,7 @@ public class ETUmulator extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
-      
+ 
         injector.injectMembers(this);
         fileMenuController.setWindow(primaryStage.getOwner());
 
@@ -77,99 +77,94 @@ public class ETUmulator extends Application {
         });      
         primaryStage.setOnCloseRequest((WindowEvent event) -> {
             int firstOne=fileMenuController.getLength();
-            int lastOne=fileMenuController.document.getText().length();
-            
-         if(firstOne!=lastOne && !fileMenuController.document.getTargetFile().getName().equals(
+            int lastOne=fileMenuController.document.getText().length();           
+            if(firstOne!=lastOne && !fileMenuController.document.getTargetFile().getName().equals(
                  "untitled")){
-            Stage stage = new Stage();      
-            VBox box = new VBox();
-	        box.setPadding(new Insets(10));
-            box.setAlignment(Pos.CENTER);
-            Label label = new Label("Are you sure exit before saving?");
-            Button btnSave = new Button();
-	        btnSave.setText("Save");
-            Button btnExit = new Button();
-	        btnExit.setText("Exit");
-            btnExit.setOnAction(new EventHandler<ActionEvent>() {
+                Stage stage = new Stage();      
+                VBox box = new VBox();
+	            box.setPadding(new Insets(10));
+                box.setAlignment(Pos.CENTER);
+                Label label = new Label("Are you sure exit before saving?");
+                Button btnSave = new Button();
+	            btnSave.setText("Save");
+                Button btnExit = new Button();
+	            btnExit.setText("Exit");
+                btnExit.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override
 	            public void handle(ActionEvent event) {
 	                primaryStage.close();
 	                stage.close();
-	      }
-	        });
-             btnSave.setOnAction(new EventHandler<ActionEvent>() {
+	            }
+	            });
+                btnSave.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override
 	            public void handle(ActionEvent event) {
                     try {
                         fileMenuController.document.saveDocument();
-                    primaryStage.close();
-	                stage.close();
+                        primaryStage.close();
+	                    stage.close();
                     } catch(IOException ex) {
                         Logger.getLogger(ETUmulator.class.getName()).log(Level.SEVERE, null, ex);
                     }
-	      }
-	        });
-            box.getChildren().add(label);
-            box.getChildren().add(btnSave);
-	        box.getChildren().add(btnExit);
-	        Scene scene1=new Scene(box,250,150);
-	        stage.setScene(scene1);
-	        stage.show(); 
-	        stage.show();
-           event.consume();
-         }
-         else if(firstOne!=lastOne && fileMenuController.document.getTargetFile().getName().equals(
+	            }       
+	            });
+                box.getChildren().add(label);
+                box.getChildren().add(btnSave);
+	            box.getChildren().add(btnExit);
+	            Scene scene1=new Scene(box,250,150);
+	            stage.setScene(scene1);
+	            stage.show(); 
+	            stage.show();
+                event.consume();
+            }
+            else if(firstOne!=lastOne && fileMenuController.document.getTargetFile().getName().equals(
                  "untitled")){
-             
-                         Stage stage = new Stage();      
-            VBox box = new VBox();
-	        box.setPadding(new Insets(10));
-            box.setAlignment(Pos.CENTER);
-            Label label = new Label("Are you sure exit before saving?");
-            Button btnSave = new Button();
-	        btnSave.setText("Save As");
-            Button btnExit = new Button();
-	        btnExit.setText("Exit");
-            btnExit.setOnAction(new EventHandler<ActionEvent>() {
+                Stage stage = new Stage();      
+                VBox box = new VBox();
+	            box.setPadding(new Insets(10));
+                box.setAlignment(Pos.CENTER);
+                Label label = new Label("Are you sure exit before saving?");
+                Button btnSave = new Button();
+	            btnSave.setText("Save As");
+                Button btnExit = new Button();
+	            btnExit.setText("Exit");
+                btnExit.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override
 	            public void handle(ActionEvent event) {
 	                primaryStage.close();
 	                stage.close();
-	      }
-	        });
-             btnSave.setOnAction(new EventHandler<ActionEvent>() {
+	            }
+	            });
+                btnSave.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override
-	            public void handle(ActionEvent event) {
-                    
-                        File file = fileMenuController.fileChooser.showSaveDialog(fileMenuController.window);
-        if(file == null) {
-            return;
-        }
-        fileMenuController.document.setTargetFile(file);
-                try {
-                    fileMenuController.document.saveDocument();
-                } catch(IOException ex) {
-                    Logger.getLogger(ETUmulator.class.getName()).log(Level.SEVERE, null, ex);
-                }
+	            public void handle(ActionEvent event) { 
+                    File file = fileMenuController.fileChooser.showSaveDialog(fileMenuController.window);
+                    if(file == null) {
+                        return;
+                    }
+                    fileMenuController.document.setTargetFile(file);
+                    try {
+                        fileMenuController.document.saveDocument();
+                    } catch(IOException ex) {
+                        Logger.getLogger(ETUmulator.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     primaryStage.close();
 	                stage.close();
                 }
-             });
-            box.getChildren().add(label);
-            box.getChildren().add(btnSave);
-	        box.getChildren().add(btnExit);
-	        Scene scene1=new Scene(box,250,150);
-	        stage.setScene(scene1);
-	        stage.show(); 
-	        stage.show();
-           event.consume();
-             
-              
-         }
-         else{
-          processor.terminate();
-          primaryStage.close();
-         }
+                });
+                box.getChildren().add(label);
+                box.getChildren().add(btnSave);
+	            box.getChildren().add(btnExit);
+	            Scene scene1=new Scene(box,250,150);
+	            stage.setScene(scene1);
+	            stage.show(); 
+	            stage.show();
+                event.consume();
+            }
+            else{
+                processor.terminate();
+                primaryStage.close();
+            }
         });
        
     }

@@ -65,9 +65,9 @@ public class FileMenuController {
                     text.append(line).append('\n');
                 }
             }  
-            son=0;
-            document.setText(text.toString());
-            document.setTargetFile(file);    
+           son=0;
+           document.setText(text.toString());
+           document.setTargetFile(file);    
            lengthStart=document.getText().length();
            int b=lengthStart;
             setLength(b);    
