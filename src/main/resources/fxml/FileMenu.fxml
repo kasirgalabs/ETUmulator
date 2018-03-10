@@ -26,5 +26,10 @@
                 <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
             </accelerator>
         </MenuItem>
+        <Menu mnemonicParsing="false" onAction="#openRecentFilesOnAction" text="Open Recent Files">
+            <accelerator>
+                <KeyCodeCombination alt="UP" code="R" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+            </accelerator>
+        </Menu>
     </items>
 </Menu>

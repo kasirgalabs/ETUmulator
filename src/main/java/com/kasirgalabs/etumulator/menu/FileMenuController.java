@@ -82,4 +82,8 @@ public class FileMenuController {
         document.setTargetFile(file);
         document.saveDocument();
     }
+    @FXML
+    private void openRecentFilesOnAction(ActionEvent event){
+
+    }
 }
