@@ -64,5 +64,3 @@ Open a terminal in the root of the project directory, then execute the command:
 ```
 ./gradlew check
 ```
-
-w ci add
