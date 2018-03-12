@@ -16,18 +16,12 @@
  */
 package com.kasirgalabs.etumulator;
 
-import static javafx.application.Application.launch;
-
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.kasirgalabs.etumulator.menu.FileMenuController;
 import com.kasirgalabs.etumulator.processor.GUISafeProcessor;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -42,9 +36,14 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class ETUmulator extends Application {
     @Inject
-    public FileMenuController fileMenuController;
+    private FileMenuController fileMenuController;
     @Inject
     private GUISafeProcessor processor;
 
@@ -61,11 +60,11 @@ public class ETUmulator extends Application {
         ClassLoader classLoader = ETUmulator.class.getClassLoader();
         FXMLLoader fxmlLoader = new FXMLLoader(classLoader.getResource("fxml/ETUmulator.fxml"));
         fxmlLoader.setControllerFactory(injector::getInstance);
-        Parent root = (Parent) fxmlLoader.load();
+        Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
- 
+
         injector.injectMembers(this);
         fileMenuController.setWindow(primaryStage.getOwner());
 
@@ -74,98 +73,95 @@ public class ETUmulator extends Application {
             public void run() {
                 processor.stop();
             }
-        });      
+        });
         primaryStage.setOnCloseRequest((WindowEvent event) -> {
-            int firstOne=fileMenuController.getLength();
-            int lastOne=fileMenuController.document.getText().length();           
-            if(firstOne!=lastOne && !fileMenuController.document.getTargetFile().getName().equals(
-                 "untitled")){
-                Stage stage = new Stage();      
+            int firstOne = fileMenuController.getLength();
+            int lastOne = fileMenuController.document.getText().length();
+            if (firstOne != lastOne && !fileMenuController.document.getTargetFile().getName().equals(
+                    "untitled")) {
+                Stage stage = new Stage();
                 VBox box = new VBox();
-	            box.setPadding(new Insets(10));
+                box.setPadding(new Insets(10));
                 box.setAlignment(Pos.CENTER);
                 Label label = new Label("Are you sure exit before saving?");
                 Button btnSave = new Button();
-	            btnSave.setText("Save");
+                btnSave.setText("Save");
                 Button btnExit = new Button();
-	            btnExit.setText("Exit");
+                btnExit.setText("Exit");
                 btnExit.setOnAction(new EventHandler<ActionEvent>() {
-	            @Override
-	            public void handle(ActionEvent event) {
-	                primaryStage.close();
-	                stage.close();
-	            }
-	            });
-                btnSave.setOnAction(new EventHandler<ActionEvent>() {
-	            @Override
-	            public void handle(ActionEvent event) {
-                    try {
-                        fileMenuController.document.saveDocument();
+                    @Override
+                    public void handle(ActionEvent event) {
                         primaryStage.close();
-	                    stage.close();
-                    } catch(IOException ex) {
-                        Logger.getLogger(ETUmulator.class.getName()).log(Level.SEVERE, null, ex);
+                        stage.close();
                     }
-	            }       
-	            });
-                box.getChildren().add(label);
-                box.getChildren().add(btnSave);
-	            box.getChildren().add(btnExit);
-	            Scene scene1=new Scene(box,250,150);
-	            stage.setScene(scene1);
-	            stage.show(); 
-	            stage.show();
-                event.consume();
-            }
-            else if(firstOne!=lastOne && fileMenuController.document.getTargetFile().getName().equals(
-                 "untitled")){
-                Stage stage = new Stage();      
-                VBox box = new VBox();
-	            box.setPadding(new Insets(10));
-                box.setAlignment(Pos.CENTER);
-                Label label = new Label("Are you sure exit before saving?");
-                Button btnSave = new Button();
-	            btnSave.setText("Save As");
-                Button btnExit = new Button();
-	            btnExit.setText("Exit");
-                btnExit.setOnAction(new EventHandler<ActionEvent>() {
-	            @Override
-	            public void handle(ActionEvent event) {
-	                primaryStage.close();
-	                stage.close();
-	            }
-	            });
+                });
                 btnSave.setOnAction(new EventHandler<ActionEvent>() {
-	            @Override
-	            public void handle(ActionEvent event) { 
-                    File file = fileMenuController.fileChooser.showSaveDialog(fileMenuController.window);
-                    if(file == null) {
-                        return;
+                    @Override
+                    public void handle(ActionEvent event) {
+                        try {
+                            fileMenuController.document.saveDocument();
+                            primaryStage.close();
+                            stage.close();
+                        } catch (IOException ex) {
+                            Logger.getLogger(ETUmulator.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
-                    fileMenuController.document.setTargetFile(file);
-                    try {
-                        fileMenuController.document.saveDocument();
-                    } catch(IOException ex) {
-                        Logger.getLogger(ETUmulator.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    primaryStage.close();
-	                stage.close();
-                }
                 });
                 box.getChildren().add(label);
                 box.getChildren().add(btnSave);
-	            box.getChildren().add(btnExit);
-	            Scene scene1=new Scene(box,250,150);
-	            stage.setScene(scene1);
-	            stage.show(); 
-	            stage.show();
+                box.getChildren().add(btnExit);
+                Scene scene1 = new Scene(box, 250, 150);
+                stage.setScene(scene1);
+                stage.show();
+                stage.show();
                 event.consume();
-            }
-            else{
+            } else if (firstOne != lastOne && fileMenuController.document.getTargetFile().getName().equals(
+                    "untitled")) {
+                Stage stage = new Stage();
+                VBox box = new VBox();
+                box.setPadding(new Insets(10));
+                box.setAlignment(Pos.CENTER);
+                Label label = new Label("Are you sure exit before saving?");
+                Button btnSave = new Button();
+                btnSave.setText("Save As");
+                Button btnExit = new Button();
+                btnExit.setText("Exit");
+                btnExit.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        primaryStage.close();
+                        stage.close();
+                    }
+                });
+                btnSave.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        File file = fileMenuController.fileChooser.showSaveDialog(fileMenuController.window);
+                        if (file == null) {
+                            return;
+                        }
+                        fileMenuController.document.setTargetFile(file);
+                        try {
+                            fileMenuController.document.saveDocument();
+                        } catch (IOException ex) {
+                            Logger.getLogger(ETUmulator.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        primaryStage.close();
+                        stage.close();
+                    }
+                });
+                box.getChildren().add(label);
+                box.getChildren().add(btnSave);
+                box.getChildren().add(btnExit);
+                Scene scene1 = new Scene(box, 250, 150);
+                stage.setScene(scene1);
+                stage.show();
+                stage.show();
+                event.consume();
+            } else {
                 processor.terminate();
                 primaryStage.close();
             }
         });
-       
     }
 }
