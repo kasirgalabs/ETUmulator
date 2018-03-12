@@ -26,11 +26,23 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import java.util.ArrayList;
+import javafx.event.EventHandler;
+import java.io.*;
+import javafx.event.ActionEvent;
 
 public class FileMenuController {
     private final Document document;
     private final FileChooser fileChooser;
     private Window window;
+    private ArrayList<File> recentFiles=new ArrayList<File>();
+    @FXML private Menu openRecentTab;
+    private boolean controlRecent=false;
+    private ActionEvent op;
+
 
     @Inject
     public FileMenuController(Document document) {
@@ -48,7 +60,10 @@ public class FileMenuController {
         File file = fileChooser.showSaveDialog(window);
         if(file != null) {
             document.setTargetFile(file);
+            recentFiles.add(file);
+            controlRecent=true;
             document.clear();
+            try{ openRecentFilesOnAction(op); } catch(NullPointerException e){}
         }
     }
 
@@ -63,8 +78,12 @@ public class FileMenuController {
                     text.append(line).append('\n');
                 }
             }
+            catch(Exception e){}
             document.setText(text.toString());
             document.setTargetFile(file);
+            recentFiles.add(file);
+            controlRecent=true;
+            try{ openRecentFilesOnAction(op); } catch(NullPointerException e){}
         }
     }
 
@@ -76,14 +95,47 @@ public class FileMenuController {
     @FXML
     private void saveAsOnaction(ActionEvent event) throws IOException {
         File file = fileChooser.showSaveDialog(window);
+        if (recentFiles.contains(file)){
+            recentFiles.remove(file);
+        }
         if(file == null) {
             return;
         }
         document.setTargetFile(file);
         document.saveDocument();
+        recentFiles.add(file);
+        controlRecent=true;
+        try{ openRecentFilesOnAction(op); } catch(NullPointerException e){}
     }
     @FXML
     private void openRecentFilesOnAction(ActionEvent event){
-
+    	op = event;
+        openRecentTab = (Menu)event.getSource();
+        openRecentTab.getItems().clear();
+        MenuItem menuItem;
+        if (controlRecent){
+            for (int i=recentFiles.size()-1;i>=0;i--){
+                File file = recentFiles.get(i);
+                menuItem = new MenuItem(recentFiles.get(i).getName());
+                openRecentTab.getItems().add(menuItem);
+                menuItem.setOnAction(new EventHandler<ActionEvent>() {
+                    public void handle(ActionEvent t) {
+                        if(file != null) {
+                            StringBuilder text = new StringBuilder(256);
+                            try(BufferedReader bf = new BufferedReader(new FileReader(file))) {
+                                String line;
+                                while((line = bf.readLine()) != null) {
+                                    text.append(line).append('\n');
+                                }
+                            }
+                            catch(Exception e){ }
+                            document.setText(text.toString());
+                            document.setTargetFile(file);
+                        }
+                    }
+                });
+            }
+        }
+        controlRecent = false;
     }
 }
