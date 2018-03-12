@@ -91,8 +91,7 @@ public class ETUmulator extends Application {
                 btnExit.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        primaryStage.close();
-                        stage.close();
+                        System.exit(0);
                     }
                 });
                 btnSave.setOnAction(new EventHandler<ActionEvent>() {
@@ -100,8 +99,7 @@ public class ETUmulator extends Application {
                     public void handle(ActionEvent event) {
                         try {
                             fileMenuController.document.saveDocument();
-                            primaryStage.close();
-                            stage.close();
+                            System.exit(0);
                         } catch (IOException ex) {
                             Logger.getLogger(ETUmulator.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -129,8 +127,7 @@ public class ETUmulator extends Application {
                 btnExit.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        primaryStage.close();
-                        stage.close();
+                        System.exit(0);
                     }
                 });
                 btnSave.setOnAction(new EventHandler<ActionEvent>() {
@@ -146,8 +143,7 @@ public class ETUmulator extends Application {
                         } catch (IOException ex) {
                             Logger.getLogger(ETUmulator.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        primaryStage.close();
-                        stage.close();
+                        System.exit(0);
                     }
                 });
                 box.getChildren().add(label);
@@ -159,8 +155,7 @@ public class ETUmulator extends Application {
                 stage.show();
                 event.consume();
             } else {
-                processor.terminate();
-                primaryStage.close();
+                System.exit(0);
             }
         });
     }
