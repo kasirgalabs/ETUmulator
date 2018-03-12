@@ -35,20 +35,22 @@ import java.io.*;
 import javafx.event.ActionEvent;
 
 public class FileMenuController {
-    private final Document document;
-    private final FileChooser fileChooser;
-    private Window window;
+
+    public final Document document;
+    public final FileChooser fileChooser;
+    public Window window;
+    public int lengthStart;
+    public static int son; //for start length
     private ArrayList<File> recentFiles=new ArrayList<File>();
     @FXML private Menu openRecentTab;
     private boolean controlRecent=false;
     private ActionEvent op;
 
-
     @Inject
     public FileMenuController(Document document) {
         this.document = document;
         this.fileChooser = new FileChooser();
-        fileChooser.setTitle("ETUmulator");
+        fileChooser.setTitle("ETUmulator");       
     }
 
     public void setWindow(Window window) {
@@ -68,7 +70,7 @@ public class FileMenuController {
     }
 
     @FXML
-    private void openOnAction(ActionEvent event) throws IOException {
+    public void openOnAction(ActionEvent event) throws IOException {
         File file = fileChooser.showOpenDialog(window);
         if(file != null) {
             StringBuilder text = new StringBuilder(256);
@@ -77,18 +79,23 @@ public class FileMenuController {
                 while((line = bf.readLine()) != null) {
                     text.append(line).append('\n');
                 }
+<<<<<<< HEAD
             }
             catch(Exception e){}
+            son=0;
             document.setText(text.toString());
             document.setTargetFile(file);
+            lengthStart=document.getText().length();
+           	int b=lengthStart;
+            setLength(b);    
             recentFiles.add(file);
             controlRecent=true;
             try{ openRecentFilesOnAction(op); } catch(NullPointerException e){}
         }
     }
-
+    
     @FXML
-    private void saveOnAction(ActionEvent event) throws IOException {
+    public void saveOnAction(ActionEvent event) throws IOException {
         document.saveDocument();
     }
 
@@ -137,5 +144,11 @@ public class FileMenuController {
             }
         }
         controlRecent = false;
+    }
+    public int getLength(){
+        return son;
+    }
+    public void setLength(int length){ 
+      this.son=length; 
     }
 }
