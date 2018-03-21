@@ -44,7 +44,6 @@ public class FileMenuController {
     private final List<File> recentFiles=new ArrayList<>();
     @FXML private Menu openRecentTab;
     private boolean controlRecent;
-    private ActionEvent orfEvent;
 
     @Inject
     public FileMenuController(Document document) {
@@ -83,7 +82,7 @@ public class FileMenuController {
                 }
 
             }
-            catch(Exception e){}
+
 
             son=0;
             document.setText(text.toString());
@@ -95,7 +94,6 @@ public class FileMenuController {
             controlRecent=true;
             int b=lengthStart;
             setLength(b);
-            recentFiles.add(file);
             controlRecent=true;
         }
     }
@@ -141,7 +139,7 @@ public class FileMenuController {
                                     text.append(line).append('\n');
                                 }
                             }
-                            catch(Exception e){ }
+                            catch(Exception e){ System.out.println(e.getMessage());}
                             document.setText(text.toString());
                             document.setTargetFile(file);
                         }
