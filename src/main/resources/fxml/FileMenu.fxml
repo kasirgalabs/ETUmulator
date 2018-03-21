@@ -4,7 +4,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.input.KeyCodeCombination?>
 
-<Menu mnemonicParsing="false" text="File" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kasirgalabs.etumulator.menu.FileMenuController">
+<Menu mnemonicParsing="false" text="File" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kasirgalabs.etumulator.menu.FileMenuController">
     <items>
         <MenuItem mnemonicParsing="false" onAction="#newOnAction" text="New...">
             <accelerator>

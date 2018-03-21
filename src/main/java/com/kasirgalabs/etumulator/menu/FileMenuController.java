@@ -27,12 +27,12 @@ import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import java.util.List;
 import java.util.ArrayList;
 import javafx.event.EventHandler;
 import java.io.*;
-import javafx.event.ActionEvent;
+
 
 public class FileMenuController {
 
@@ -41,10 +41,10 @@ public class FileMenuController {
     public Window window;
     public int lengthStart;
     public static int son; //for start length
-    private ArrayList<File> recentFiles=new ArrayList<File>();
+    private final List<File> recentFiles=new ArrayList<>();
     @FXML private Menu openRecentTab;
-    private boolean controlRecent=false;
-    private ActionEvent op;
+    private boolean controlRecent;
+    private ActionEvent orfEvent;
 
     @Inject
     public FileMenuController(Document document) {
@@ -62,10 +62,12 @@ public class FileMenuController {
         File file = fileChooser.showSaveDialog(window);
         if(file != null) {
             document.setTargetFile(file);
-            recentFiles.add(file);
+            if (!checkDuplicate(recentFiles,file)){
+                recentFiles.add(file);
+            }
             controlRecent=true;
             document.clear();
-            try{ openRecentFilesOnAction(op); } catch(NullPointerException e){}
+
         }
     }
 
@@ -79,18 +81,18 @@ public class FileMenuController {
                 while((line = bf.readLine()) != null) {
                     text.append(line).append('\n');
                 }
-<<<<<<< HEAD
+
             }
-            catch(Exception e){}
             son=0;
             document.setText(text.toString());
             document.setTargetFile(file);
             lengthStart=document.getText().length();
            	int b=lengthStart;
-            setLength(b);    
-            recentFiles.add(file);
+            setLength(b);
+            if (!checkDuplicate(recentFiles,file)){
+                recentFiles.add(file);
+            }
             controlRecent=true;
-            try{ openRecentFilesOnAction(op); } catch(NullPointerException e){}
         }
     }
     
@@ -110,13 +112,13 @@ public class FileMenuController {
         }
         document.setTargetFile(file);
         document.saveDocument();
-        recentFiles.add(file);
+        if (!checkDuplicate(recentFiles,file)){
+            recentFiles.add(file);
+        }
         controlRecent=true;
-        try{ openRecentFilesOnAction(op); } catch(NullPointerException e){}
     }
     @FXML
     private void openRecentFilesOnAction(ActionEvent event){
-    	op = event;
         openRecentTab = (Menu)event.getSource();
         openRecentTab.getItems().clear();
         MenuItem menuItem;
@@ -144,6 +146,14 @@ public class FileMenuController {
             }
         }
         controlRecent = false;
+    }
+    public boolean checkDuplicate(List<File> recent,File file){
+        for (int i=0;i<recent.size();i++){
+            if (file.getName().equals(recent.get(i).getName())){
+                return true;
+            }
+        }
+        return false;
     }
     public int getLength(){
         return son;
