@@ -26,19 +26,30 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
+import java.util.List;
+import java.util.ArrayList;
+import javafx.event.EventHandler;
+import java.io.*;
+
 
 public class FileMenuController {
+
     public final Document document;
     public final FileChooser fileChooser;
     public Window window;
     public int lengthStart;
     public static int son; //for start length
-    
+    private final List<File> recentFiles=new ArrayList<>();
+    @FXML private Menu openRecentTab;
+    private boolean controlRecent;
+
     @Inject
     public FileMenuController(Document document) {
         this.document = document;
         this.fileChooser = new FileChooser();
-        fileChooser.setTitle("ETUmulator");       
+        fileChooser.setTitle("ETUmulator");
     }
 
     public void setWindow(Window window) {
@@ -50,7 +61,12 @@ public class FileMenuController {
         File file = fileChooser.showSaveDialog(window);
         if(file != null) {
             document.setTargetFile(file);
+            if (!checkDuplicate(recentFiles,file)){
+                recentFiles.add(file);
+            }
+            controlRecent=true;
             document.clear();
+
         }
     }
 
@@ -64,16 +80,24 @@ public class FileMenuController {
                 while((line = bf.readLine()) != null) {
                     text.append(line).append('\n');
                 }
-            }  
-           son=0;
-           document.setText(text.toString());
-           document.setTargetFile(file);    
-           lengthStart=document.getText().length();
-           int b=lengthStart;
-            setLength(b);    
+
+            }
+
+
+            son=0;
+            document.setText(text.toString());
+            document.setTargetFile(file);
+            lengthStart=document.getText().length();
+            if (!checkDuplicate(recentFiles,file)){
+                recentFiles.add(file);
+            }
+            controlRecent=true;
+            int b=lengthStart;
+            setLength(b);
+            controlRecent=true;
         }
     }
-    
+
     @FXML
     public void saveOnAction(ActionEvent event) throws IOException {
         document.saveDocument();
@@ -82,16 +106,61 @@ public class FileMenuController {
     @FXML
     private void saveAsOnaction(ActionEvent event) throws IOException {
         File file = fileChooser.showSaveDialog(window);
+        if (recentFiles.contains(file)){
+            recentFiles.remove(file);
+        }
         if(file == null) {
             return;
         }
         document.setTargetFile(file);
         document.saveDocument();
+        if (!checkDuplicate(recentFiles,file)){
+            recentFiles.add(file);
+        }
+        controlRecent=true;
+    }
+    @FXML
+    private void openRecentFilesOnAction(ActionEvent event){
+        openRecentTab = (Menu)event.getSource();
+        openRecentTab.getItems().clear();
+        MenuItem menuItem;
+        if (controlRecent){
+            for (int i=recentFiles.size()-1;i>=0;i--){
+                File file = recentFiles.get(i);
+                menuItem = new MenuItem(recentFiles.get(i).getName());
+                openRecentTab.getItems().add(menuItem);
+                menuItem.setOnAction(new EventHandler<ActionEvent>() {
+                    public void handle(ActionEvent t) {
+                        if(file != null) {
+                            StringBuilder text = new StringBuilder(256);
+                            try(BufferedReader bf = new BufferedReader(new FileReader(file))) {
+                                String line;
+                                while((line = bf.readLine()) != null) {
+                                    text.append(line).append('\n');
+                                }
+                            }
+                            catch(Exception e){ System.out.println(e.getMessage());}
+                            document.setText(text.toString());
+                            document.setTargetFile(file);
+                        }
+                    }
+                });
+            }
+        }
+        controlRecent = false;
+    }
+    public boolean checkDuplicate(List<File> recent,File file){
+        for (int i=0;i<recent.size();i++){
+            if (file.getName().equals(recent.get(i).getName())){
+                return true;
+            }
+        }
+        return false;
     }
     public int getLength(){
         return son;
     }
-    public void setLength(int length){ 
-      this.son=length; 
+    public void setLength(int length){
+      this.son=length;
     }
 }
