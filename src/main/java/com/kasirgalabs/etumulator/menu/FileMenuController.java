@@ -50,7 +50,7 @@ public class FileMenuController {
     public FileMenuController(Document document) {
         this.document = document;
         this.fileChooser = new FileChooser();
-        fileChooser.setTitle("ETUmulator");       
+        fileChooser.setTitle("ETUmulator");
     }
 
     public void setWindow(Window window) {
@@ -83,19 +83,23 @@ public class FileMenuController {
                 }
 
             }
+            catch(Exception e){}
+
             son=0;
             document.setText(text.toString());
             document.setTargetFile(file);
             lengthStart=document.getText().length();
-           	int b=lengthStart;
-            setLength(b);
             if (!checkDuplicate(recentFiles,file)){
                 recentFiles.add(file);
             }
             controlRecent=true;
+            int b=lengthStart;
+            setLength(b);
+            recentFiles.add(file);
+            controlRecent=true;
         }
     }
-    
+
     @FXML
     public void saveOnAction(ActionEvent event) throws IOException {
         document.saveDocument();
@@ -158,7 +162,7 @@ public class FileMenuController {
     public int getLength(){
         return son;
     }
-    public void setLength(int length){ 
-      this.son=length; 
+    public void setLength(int length){
+      this.son=length;
     }
 }
