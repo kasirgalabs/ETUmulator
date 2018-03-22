@@ -158,5 +158,13 @@ public class ETUmulator extends Application {
                 System.exit(0);
             }
         });
+        OutputStream out = new OutputStream(){
+            private TextArea console = new TextArea();
+            @Override
+            public void write(int b) throws IOException {
+                Platform.runLater(() -> console.appendText(String.valueOf((char)b)));
+            }
+        };
+        System.setErr(new PrintStream (out));
     }
 }

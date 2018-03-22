@@ -47,14 +47,6 @@ public class BaseConsole extends TextArea implements Initializable, Console, Obs
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.setErr(new PrintStream(new OutputStream() {
-            @Override
-            public void write(int b) {
-                Platform.runLater(() -> {
-                    BaseConsole.this.write((char) b);
-                });
-            }
-        }));
         readEnable = false;
         setText(userName + "@ETUmulator: ");
         uart.addObserver(this);
