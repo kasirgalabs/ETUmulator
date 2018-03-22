@@ -24,7 +24,6 @@ import java.util.logging.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore
 public class ETUmulatorTest {
     private static final Logger LOGGER = Logger.getLogger(ETUmulatorTest.class.getName());
     private volatile boolean success;
@@ -35,6 +34,7 @@ public class ETUmulatorTest {
      * @throws java.lang.InterruptedException
      */
     @Test
+    @Ignore
     public void testMain() throws InterruptedException {
 /*        Thread thread = new Thread() { // Wrapper thread.
             @Override
