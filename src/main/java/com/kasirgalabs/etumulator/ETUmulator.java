@@ -35,17 +35,24 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
+import javafx.scene.control.TextArea;
+
 public class ETUmulator extends Application {
     @Inject
     private FileMenuController fileMenuController;
     @Inject
     private GUISafeProcessor processor;
+
+    private boolean check = true;
 
     public static void main(String[] args) {
         launch(args);
@@ -162,8 +169,6 @@ public class ETUmulator extends Application {
             private TextArea console = new TextArea();
 
             public void createPopup(){
-                //console.setMouseTransparent(true);
-                //console.setFocusTraversable(false);
                 console.setEditable(false);
                 Stage stage = new Stage();
                 stage.setTitle("Error(s)!");
@@ -177,7 +182,7 @@ public class ETUmulator extends Application {
                     public void handle(ActionEvent event) {
                         stage.close();
                         console.clear();
-                        
+                        check = true;
                     }
                 });
                 stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -185,7 +190,7 @@ public class ETUmulator extends Application {
                     public void handle(WindowEvent t) {
                         stage.close();
                         console.clear();
-                        
+                        check = true;
                     }
                 });
                 Button btnClear = new Button();
@@ -201,15 +206,16 @@ public class ETUmulator extends Application {
                 box.getChildren().add(btnClear);
                 Scene scene1 = new Scene(box, 450, 350);
                 stage.setScene(scene1);
-                stage.show();
-                stage.show();
-                       
+                stage.show();          
             }            
             @Override
             public void write(int b) throws IOException {
                 Platform.runLater(() -> console.appendText(String.valueOf((char)b)));
                 if((char)b == '\n'){
-                    createPopup();
+                    if(check){
+                        createPopup();
+                        check = false;
+                    }
                 }
             }
         };
