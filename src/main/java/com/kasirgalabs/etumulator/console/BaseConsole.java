@@ -112,12 +112,12 @@ public class BaseConsole extends TextArea implements Initializable, Console, Obs
 
     @FXML
     public void setBreakpoint() {
-      Breakpoint breakpoint = Breakpoint.getInstance();
-      pointEnable=!pointEnable;
-      if(pointEnable) {
-        breakpoint.setPoint(Integer.parseInt(point.getText()));
-      }else {
-        breakpoint.reset();
-      }
+        Breakpoint breakpoint = Breakpoint.getInstance();
+        pointEnable=!pointEnable;
+        if(pointEnable) {
+          breakpoint.setPoint(Integer.parseInt(point.getText()));
+        }else {
+          breakpoint.reset();
+        }
     }
 }
