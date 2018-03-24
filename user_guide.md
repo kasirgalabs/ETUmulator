@@ -7,7 +7,7 @@ layout: default
 
 <h1> Welcome to User Guide </h1>
 
-<h2>In this guide we have the list of instructions supported by the Assembler<i>Let's look at the mnemonic list of each emulated instruction with their description</i></h2>
+<h2>In this guide we have the list of instructions supported by the Assembler<i>Let's look at the mnemonic list of each emulated instruction:</i></h2>
 <hr>
 <h3>Instructions</h3>
 <h4>Arithmetic</h4>
@@ -122,3 +122,5 @@ layout: default
 </ul>
 
 * * *
+
+<p> For more information please check out: <a href="https://github.com/kasirgalabs/ETUmulator/blob/1739f15f207d1c1c8ff80680ebd1693eb7982c0b/src/main/antlr/Assembler.g4">List of Instructions</a>
