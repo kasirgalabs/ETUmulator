@@ -114,7 +114,8 @@ public class BaseProcessor extends ProcessorBaseVisitor<Void> implements Process
     public void run(ExecutableCode executableCode) {
         pc.setValue(0);
         final String[] instructions = executableCode.getCode();
-        while(pc.getValue() < instructions.length) {
+        Breakpoint point = Breakpoint.getInstance();
+        while(pc.getValue() < instructions.length && (point.getPoint() != pc.getValue())) {
             if(pc.getValue() < 0) {
                 throw new IllegalPCException("PC can not be negative.");
             }
