@@ -87,6 +87,7 @@ logical
     | orns
     | bic
     | bics
+    | bfc
     ;
 
 branch
@@ -488,6 +489,18 @@ shiftOption
     | 'lsr'
     | 'asr'
     | 'ror'
+    ;
+
+bfc
+    : 'bfc' rd COMMA lsb COMMA width
+    ;
+
+lsb
+    : number
+    ;
+
+width
+    : number
     ;
 
 opsh
