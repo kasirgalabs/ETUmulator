@@ -173,6 +173,15 @@ public class ShiftVisitor extends ProcessorBaseVisitor<Void> {
         return null;
     }
 
+    @Override
+    public Void visitRbit(ProcessorParser.RbitContext ctx) {
+        final int NOT_USED = Integer.MAX_VALUE;
+        String destRegister = registerVisitor.visit(ctx.rd());
+        int value = registerFile.getValue(registerVisitor.visit(ctx.rm()));
+        registerFile.setValue(destRegister, shift(value, Shift.RBIT, NOT_USED));
+        return null;
+    }
+
     private int shift(int value, Shift shiftOption, int shiftAmount) {
         switch(shiftOption) {
             case ASR:
@@ -189,6 +198,14 @@ public class ShiftVisitor extends ProcessorBaseVisitor<Void> {
                     result |= 0x8000_0000;
                 }
                 return result;
+            case RBIT:
+/*               int i = 0;
+                while(value != 0){
+                    i <<=1;
+                    i |= (value&1);
+                    x>>=1;
+                }*/
+                return Integer.reverseBytes(value);
             default:
                 return value;
         }

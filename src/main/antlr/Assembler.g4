@@ -67,6 +67,7 @@ shift
     | rors
     | rrx
     | rrxs
+    | rbit
     ;
 
 compare
@@ -259,6 +260,10 @@ rrx
 
 rrxs
     : 'rrxs' rd COMMA rm
+    ;
+
+rbit
+    : 'rbit' rd COMMA rm
     ;
 
 cmp
