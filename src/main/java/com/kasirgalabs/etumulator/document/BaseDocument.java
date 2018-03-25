@@ -78,6 +78,7 @@ public class BaseDocument implements Initializable, Document {
 
     @Override
     public void setTargetFile(File targetFile) {
+        
         label.setText(targetFile.getName());
         this.targetFile = targetFile;
     }

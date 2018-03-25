@@ -51,6 +51,9 @@ public final class AsciiTable {
         if(hasEscapeSequence(code)) {
             return escapeSequence(code);
         }
+        if (isControlCharacher(code)){
+            return controlCharacter(code);
+        }
         if(isExtendedAscii(code)) {
             return Character.toString(EXTENDED_ASCII_TABLE[code - 0x80]);
         }
@@ -86,6 +89,61 @@ public final class AsciiTable {
                 return "\\e";
             default:
                 return "0";
+        }
+    }
+
+    private static boolean isControlCharacher(char code){
+        return code >= 0 && code <= 31;
+    }
+
+    private static String controlCharacter(char code){
+        switch(code){
+            case 1:
+                return "SOH";
+            case 2:
+                return "STX";
+            case 3:
+                return "ETX";
+            case 4:
+                return "EOT";
+            case 5:
+                return "ENQ";
+            case 6:
+                return "ACK";
+            case 14:
+                return "SO";
+            case 15:
+                return "SI";
+            case 16:
+                return "DLE";
+            case 17:
+                return "DC1";
+            case 18:
+                return "DC2";
+            case 19:
+                return "DC3";
+            case 20:
+                return "DC4";
+            case 21:
+                return "NAK";
+            case 22:
+                return "SYN";
+            case 23:
+                return "ETB";
+            case 24:
+                return "CAN";
+            case 25:
+                return "EM";
+            case 26:
+                return "SUB";
+            case 28:
+                return "FS";
+            case 29:
+                return "GS";
+            case 30:
+                return "RS";
+            default:
+                return "US";
         }
     }
 
