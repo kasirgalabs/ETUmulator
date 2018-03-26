@@ -175,7 +175,6 @@ public class ShiftVisitor extends ProcessorBaseVisitor<Void> {
 
     @Override
     public Void visitRbit(ProcessorParser.RbitContext ctx) { //Until a Reverse class is implemented Rbit is here.
-        final int NOT_USED = Integer.MAX_VALUE;
         String destRegister = registerVisitor.visit(ctx.rd());
         int value = registerFile.getValue(registerVisitor.visit(ctx.rm()));
         registerFile.setValue(destRegister, Integer.reverseBytes(value));
