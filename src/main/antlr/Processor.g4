@@ -263,7 +263,7 @@ rrxs
     ;
 
 rbit
-    : 'rrxs' rd COMMA rm
+    : 'rbit' rd COMMA rm
     ;
 
 cmp
