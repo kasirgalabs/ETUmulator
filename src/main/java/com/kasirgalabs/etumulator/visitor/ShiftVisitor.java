@@ -174,11 +174,11 @@ public class ShiftVisitor extends ProcessorBaseVisitor<Void> {
     }
 
     @Override
-    public Void visitRbit(ProcessorParser.RbitContext ctx) {
+    public Void visitRbit(ProcessorParser.RbitContext ctx) { //Until a Reverse class is implemented Rbit is here.
         final int NOT_USED = Integer.MAX_VALUE;
         String destRegister = registerVisitor.visit(ctx.rd());
         int value = registerFile.getValue(registerVisitor.visit(ctx.rm()));
-        registerFile.setValue(destRegister, shift(value, Shift.RBIT, NOT_USED));
+        registerFile.setValue(destRegister, Integer.reverseBytes(value));
         return null;
     }
 
@@ -198,14 +198,6 @@ public class ShiftVisitor extends ProcessorBaseVisitor<Void> {
                     result |= 0x8000_0000;
                 }
                 return result;
-            case RBIT:
-/*               int i = 0;
-                while(value != 0){
-                    i <<=1;
-                    i |= (value&1);
-                    x>>=1;
-                }*/
-                return Integer.reverseBytes(value);
             default:
                 return value;
         }

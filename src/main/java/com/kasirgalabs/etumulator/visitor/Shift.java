@@ -21,6 +21,5 @@ public enum Shift {
     LSL,
     LSR,
     ROR,
-    RRX,
-    RBIT;
+    RRX;
 }
