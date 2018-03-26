@@ -17,7 +17,7 @@ public class SyntaxHighlighter {
         "rsb", "rsbs", "rsc", "rscs", "mul", "muls", "mla", "mlas",
         "mls", "sdiv", "udiv", "mov", "movs", "mvn", "mvns", "movt",
         "asr", "asrs", "lsl", "lsls", "lsr", "lsrs", "ror", "rors",
-        "rrx", "rrxs", "cmp", "cmn", "tst", "teq", "and", "ands",
+        "rrx", "rrxs", "rbit", "cmp", "cmn", "tst", "teq", "and", "ands",
         "eor", "eors", "orr", "orrs", "orn", "orns", "bic", "bics",
         "b", "beq", "bne", "bcs", "bhs", "bcc", "blo", "bmi",
         "bpl", "bvs", "bvc", "bhi", "bls", "bge", "blt", "bgt",
