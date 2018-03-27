@@ -20,6 +20,7 @@ instruction
     | branch
     | singleDataMemory
     | stack
+    | bitfield
     | 'nop'
     ;
 
@@ -87,7 +88,6 @@ logical
     | orns
     | bic
     | bics
-    | bfc
     ;
 
 branch
@@ -124,6 +124,10 @@ singleDataMemory
 stack
     : push
     | pop
+    ;
+
+bitfield
+    : bfc
     ;
 
 add

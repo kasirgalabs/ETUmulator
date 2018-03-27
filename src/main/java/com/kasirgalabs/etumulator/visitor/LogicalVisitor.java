@@ -26,14 +26,12 @@ public class LogicalVisitor extends ProcessorBaseVisitor<Void> {
     private final APSR apsr;
     private final RegisterVisitor registerVisitor;
     private final Operand2Visitor operand2Visitor;
-    private final NumberVisitor numberVisitor;
 
     public LogicalVisitor(RegisterFile registerFile, APSR apsr) {
         this.registerFile = registerFile;
         this.apsr = apsr;
         registerVisitor = new RegisterVisitor();
         operand2Visitor = new Operand2Visitor(registerFile);
-        numberVisitor = new NumberVisitor();
     }
 
     @Override
@@ -142,17 +140,4 @@ public class LogicalVisitor extends ProcessorBaseVisitor<Void> {
         return null;
     }
 
-    @Override
-    public Void visitBfc(ProcessorParser.BfcContext ctx) {
-        String destRegister = registerVisitor.visit(ctx.rd());
-        int lsb=numberVisitor.visit(ctx.lsb());
-        int width=numberVisitor.visit(ctx.width());
-        int bitClearValue=0;
-        for(int i=lsb;i<lsb+width;i++){
-            bitClearValue+=1<<i;
-        }
-        bitClearValue=~bitClearValue;
-        registerFile.setValue(destRegister, registerFile.getValue(destRegister) & bitClearValue);
-        return null;
-    }
 }

@@ -17,15 +17,7 @@
 package com.kasirgalabs.etumulator.processor;
 
 import com.kasirgalabs.etumulator.lang.Linker.ExecutableCode;
-import com.kasirgalabs.etumulator.visitor.ArithmeticVisitor;
-import com.kasirgalabs.etumulator.visitor.BranchVisitor;
-import com.kasirgalabs.etumulator.visitor.CompareVisitor;
-import com.kasirgalabs.etumulator.visitor.LogicalVisitor;
-import com.kasirgalabs.etumulator.visitor.MoveVisitor;
-import com.kasirgalabs.etumulator.visitor.MultiplyAndDivideVisitor;
-import com.kasirgalabs.etumulator.visitor.ShiftVisitor;
-import com.kasirgalabs.etumulator.visitor.SingleDataMemoryVisitor;
-import com.kasirgalabs.etumulator.visitor.StackVisitor;
+import com.kasirgalabs.etumulator.visitor.*;
 import com.kasirgalabs.thumb2.ProcessorBaseVisitor;
 import com.kasirgalabs.thumb2.ProcessorLexer;
 import com.kasirgalabs.thumb2.ProcessorParser;
@@ -43,6 +35,7 @@ public class BaseProcessor extends ProcessorBaseVisitor<Void> implements Process
     private final SingleDataMemoryVisitor singleDataMemoryVisitor;
     private final StackVisitor stackVisitor;
     private final PC pc;
+    private final BitFieldVisitor bitFieldVisitor;
 
     public BaseProcessor(ProcessorUnits processorUnits) {
         arithmeticVisitor = new ArithmeticVisitor(processorUnits.getRegisterFile(),
@@ -63,6 +56,7 @@ public class BaseProcessor extends ProcessorBaseVisitor<Void> implements Process
                 processorUnits.getLR(), processorUnits.getStack()
         );
         pc = processorUnits.getPC();
+        bitFieldVisitor=new BitFieldVisitor(processorUnits.getRegisterFile(),processorUnits.getAPSR());
     }
 
     @Override
@@ -104,6 +98,9 @@ public class BaseProcessor extends ProcessorBaseVisitor<Void> implements Process
     public Void visitSingleDataMemory(ProcessorParser.SingleDataMemoryContext ctx) {
         return singleDataMemoryVisitor.visit(ctx);
     }
+
+    @Override
+    public Void visitBitfield(ProcessorParser.BitfieldContext ctx){ return bitFieldVisitor.visit(ctx); }
 
     @Override
     public Void visitStack(ProcessorParser.StackContext ctx) {

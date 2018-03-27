@@ -83,6 +83,12 @@ public interface ProcessorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStack(ProcessorParser.StackContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ProcessorParser#bitfield}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBitfield(ProcessorParser.BitfieldContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ProcessorParser#add}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

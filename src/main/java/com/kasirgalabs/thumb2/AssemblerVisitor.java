@@ -83,6 +83,12 @@ public interface AssemblerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStack(AssemblerParser.StackContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link AssemblerParser#bitfield}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBitfield(AssemblerParser.BitfieldContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link AssemblerParser#add}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
