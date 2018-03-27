@@ -67,4 +67,4 @@ Open a terminal in the root of the project directory, then execute the command:
 WINDOWS INTEGRATION PROCESS
 Ngrok server installed.
 Jenkins integration installed.
-Windows Integration added at Jenkins.
+Windows Integration added at Jenkins
