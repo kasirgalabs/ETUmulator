@@ -111,7 +111,8 @@ public final class ConstantValidator extends AssemblerBaseVisitor<Integer> {
     public Integer visitBfc(AssemblerParser.BfcContext ctx) {
         int lsb = visitNumber(ctx.lsb().number());
         int width = visitNumber(ctx.width().number());
-        if(lsb+width>32){
+        int maxLength=32;
+        if(lsb+width>maxLength){
             throw new NumberFormatException("Number error on line " + ctx.start.getLine()
                     + ": the sum of lsb and width cannot exceed the value of 32");
         }
