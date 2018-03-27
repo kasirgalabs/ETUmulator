@@ -44,14 +44,22 @@ public class BaseConsole extends TextArea implements Initializable, Console, Obs
         userName = System.getProperty("user.name");
         this.uart = uart;
     }
-
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+       System.setErr(new PrintStream(new OutputStream() {
+            @Override
+            public void write(int b) {
+                Platform.runLater(() -> {
+                    BaseConsole.this.write((char) b);
+                });
+            }
+        }));
         readEnable = false;
         setText(userName + "@ETUmulator: ");
         uart.addObserver(this);
         vbox.getChildren().add(this);
-    }
+   }
 
     @Override
     public void update(Class<?> clazz, Object arg) {

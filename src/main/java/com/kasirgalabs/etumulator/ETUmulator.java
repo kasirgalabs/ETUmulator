@@ -52,8 +52,6 @@ public class ETUmulator extends Application {
     @Inject
     private GUISafeProcessor processor;
 
-    private boolean check = true;
-
     public static void main(String[] args) {
         launch(args);
     }
@@ -165,60 +163,5 @@ public class ETUmulator extends Application {
                 System.exit(0);
             }
         });
-        OutputStream out = new OutputStream(){
-            private TextArea console = new TextArea();
-
-            public void createPopup(){
-                console.setEditable(false);
-                Stage stage = new Stage();
-                stage.setTitle("Error(s)!");
-                VBox box = new VBox();
-                box.setPadding(new Insets(5));
-                box.setAlignment(Pos.CENTER);
-                Button btnClose = new Button();
-                btnClose.setText("Close");
-                btnClose.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        stage.close();
-                        console.clear();
-                        check = true;
-                    }
-                });
-                stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                    @Override 
-                    public void handle(WindowEvent t) {
-                        stage.close();
-                        console.clear();
-                        check = true;
-                    }
-                });
-                Button btnClear = new Button();
-                btnClear.setText("Clear");
-                btnClear.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        console.clear();
-                    }
-                });
-                box.getChildren().add(console);
-                box.getChildren().add(btnClose);
-                box.getChildren().add(btnClear);
-                Scene scene1 = new Scene(box, 450, 350);
-                stage.setScene(scene1);
-                stage.show();          
-            }            
-            @Override
-            public void write(int b) throws IOException {
-                Platform.runLater(() -> console.appendText(String.valueOf((char)b)));
-                if((char)b == '\n'){
-                    if(check){
-                        createPopup();
-                        check = false;
-                    }
-                }
-            }
-        };
-        System.setErr(new PrintStream (out));
     }
 }
