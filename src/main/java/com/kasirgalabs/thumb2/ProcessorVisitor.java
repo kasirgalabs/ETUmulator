@@ -83,6 +83,12 @@ public interface ProcessorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStack(ProcessorParser.StackContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ProcessorParser#bitfield}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBitfield(ProcessorParser.BitfieldContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ProcessorParser#add}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -616,6 +622,24 @@ public interface ProcessorVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitShiftOption(ProcessorParser.ShiftOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ProcessorParser#bfc}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBfc(ProcessorParser.BfcContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ProcessorParser#lsb}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLsb(ProcessorParser.LsbContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ProcessorParser#width}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWidth(ProcessorParser.WidthContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ProcessorParser#opsh}.
 	 * @param ctx the parse tree

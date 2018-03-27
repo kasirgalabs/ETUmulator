@@ -42,6 +42,16 @@ public class NumberVisitor extends ProcessorBaseVisitor<Integer> {
     }
 
     @Override
+    public Integer visitLsb(ProcessorParser.LsbContext ctx) {
+        return visitNumber(ctx.number());
+    }
+
+    @Override
+    public Integer visitWidth(ProcessorParser.WidthContext ctx) {
+        return visitNumber(ctx.number());
+    }
+
+    @Override
     public Integer visitNumber(ProcessorParser.NumberContext ctx) {
         if(ctx.DECIMAL() != null) {
             return new BigInteger(ctx.DECIMAL().getText()).intValue();

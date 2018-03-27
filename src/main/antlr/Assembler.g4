@@ -20,6 +20,7 @@ instruction
     | branch
     | singleDataMemory
     | stack
+    | bitfield
     | 'nop'
     ;
 
@@ -123,6 +124,10 @@ singleDataMemory
 stack
     : push
     | pop
+    ;
+
+bitfield
+    : bfc
     ;
 
 add
@@ -492,6 +497,19 @@ shiftOption
     | 'lsr'
     | 'asr'
     | 'ror'
+    ;
+
+
+bfc
+    : 'bfc' rd COMMA lsb COMMA width
+    ;
+
+lsb
+    : number
+    ;
+
+width
+    : number
     ;
 
 opsh

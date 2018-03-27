@@ -139,4 +139,5 @@ public class LogicalVisitor extends ProcessorBaseVisitor<Void> {
         registerFile.setValue(destRegister, apsr.updateNZ(left & ~right));
         return null;
     }
+
 }

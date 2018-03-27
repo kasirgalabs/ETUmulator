@@ -83,6 +83,12 @@ public interface AssemblerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStack(AssemblerParser.StackContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link AssemblerParser#bitfield}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBitfield(AssemblerParser.BitfieldContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link AssemblerParser#add}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -622,6 +628,24 @@ public interface AssemblerVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitShiftOption(AssemblerParser.ShiftOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AssemblerParser#bfc}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBfc(AssemblerParser.BfcContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AssemblerParser#lsb}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLsb(AssemblerParser.LsbContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AssemblerParser#width}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWidth(AssemblerParser.WidthContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link AssemblerParser#opsh}.
 	 * @param ctx the parse tree

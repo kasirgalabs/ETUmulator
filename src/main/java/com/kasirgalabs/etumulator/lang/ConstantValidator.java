@@ -108,6 +108,18 @@ public final class ConstantValidator extends AssemblerBaseVisitor<Integer> {
     }
 
     @Override
+    public Integer visitBfc(AssemblerParser.BfcContext ctx) {
+        int lsb = visitNumber(ctx.lsb().number());
+        int width = visitNumber(ctx.width().number());
+        int maxLength=32;
+        if(lsb+width>maxLength){
+            throw new NumberFormatException("Number error on line " + ctx.start.getLine()
+                    + ": the sum of lsb and width cannot exceed the value of 32");
+        }
+        return visitChildren(ctx);
+    }
+
+    @Override
     public Integer visitSh(AssemblerParser.ShContext ctx) {
         return visitNumber(ctx.number());
     }
