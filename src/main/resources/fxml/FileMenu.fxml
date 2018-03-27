@@ -26,6 +26,41 @@
                 <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
             </accelerator>
         </MenuItem>
+
+        <Menu mnemonicParsing="false" text="Examples...">
+
+
+
+
+            <accelerator>
+                <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+            </accelerator>
+
+            <MenuItem mnemonicParsing="false" onAction="#openExampleOnAction" text="Example">
+                <accelerator>
+                    <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                </accelerator>
+            </MenuItem>
+
+            <MenuItem mnemonicParsing="false" onAction="#openLoopExampleOnAction" text="Loop">
+                <accelerator>
+                    <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                </accelerator>
+            </MenuItem>
+
+            <MenuItem mnemonicParsing="false" onAction="#openInstructionsExampleOnAction" text="Instructions">
+                <accelerator>
+                    <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                </accelerator>
+            </MenuItem>
+
+
+
+
+
+
+        </Menu>
+
         <Menu mnemonicParsing="false" onAction="#openRecentFilesOnAction" text="Open Recent Files">
             <accelerator>
                 <KeyCodeCombination alt="UP" code="R" control="DOWN" meta="UP" shift="UP" shortcut="UP" />

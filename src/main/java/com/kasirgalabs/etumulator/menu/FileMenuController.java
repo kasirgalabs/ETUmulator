@@ -22,6 +22,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
@@ -73,30 +74,35 @@ public class FileMenuController {
     @FXML
     public void openOnAction(ActionEvent event) throws IOException {
         File file = fileChooser.showOpenDialog(window);
-        if(file != null) {
-            StringBuilder text = new StringBuilder(256);
-            try(BufferedReader bf = new BufferedReader(new FileReader(file))) {
-                String line;
-                while((line = bf.readLine()) != null) {
-                    text.append(line).append('\n');
-                }
-
-            }
-
-
-            son=0;
-            document.setText(text.toString());
-            document.setTargetFile(file);
-            lengthStart=document.getText().length();
-            if (!checkDuplicate(recentFiles,file)){
-                recentFiles.add(file);
-            }
-            controlRecent=true;
-            int b=lengthStart;
-            setLength(b);
-            controlRecent=true;
-        }
+        takeFileToText(file);
     }
+
+
+
+    @FXML
+    public void openExampleOnAction(ActionEvent event) throws IOException {
+        File file = new File("Example");
+        takeFileToText(file);
+        Label label = new Label("r1 = 0, r2 = 1000 is initial condition.\n Increases r1 until r1 = 1000. Loops this infinite times.");
+    }
+    @FXML
+    public void openLoopExampleOnAction(ActionEvent event) throws IOException {
+        File file = new File("Loop");
+        takeFileToText(file);
+    }
+    @FXML
+    public void openInstructionsExampleOnAction(ActionEvent event) throws IOException {
+        File file = new File("Instructions");
+        takeFileToText(file);
+    }
+
+
+
+
+
+
+
+
 
     @FXML
     public void saveOnAction(ActionEvent event) throws IOException {
@@ -148,7 +154,56 @@ public class FileMenuController {
             }
         }
         controlRecent = false;
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void takeFileToText(File file){
+        if(file != null) {
+            StringBuilder text = new StringBuilder(256);
+            try(BufferedReader bf = new BufferedReader(new FileReader(file))) {
+                String line;
+                while((line = bf.readLine()) != null) {
+                    text.append(line).append('\n');
+                }
+
+            }catch(Exception e){System.err.println("FILE NOT FOUND!");};
+
+
+            son=0;
+            document.setText(text.toString());
+            document.setTargetFile(file);
+            lengthStart=document.getText().length();
+            if (!checkDuplicate(recentFiles,file)){
+                recentFiles.add(file);
+            }
+            controlRecent=true;
+            int b=lengthStart;
+            setLength(b);
+            controlRecent=true;
+        }
+    }
+
+
+
+
     public boolean checkDuplicate(List<File> recent,File file){
         for (int i=0;i<recent.size();i++){
             if (file.getName().equals(recent.get(i).getName())){
@@ -161,6 +216,7 @@ public class FileMenuController {
         return son;
     }
     public void setLength(int length){
-      this.son=length;
+        this.son=length;
     }
 }
+

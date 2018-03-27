@@ -34,6 +34,7 @@ public class Thumb2CodeArea extends CodeArea {
                     SyntaxHighlighter syntaxHighlighter = new SyntaxHighlighter();
                     setStyleSpans(0, syntaxHighlighter.highlight(getText()));
                 });
+       // insertText(getCaretPosition(), "Merhaba");
         addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent e) -> {
             if(e.getCode() == KeyCode.TAB) {
                 String s = "    ";
