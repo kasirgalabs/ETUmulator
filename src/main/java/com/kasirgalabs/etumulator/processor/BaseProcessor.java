@@ -56,7 +56,7 @@ public class BaseProcessor extends ProcessorBaseVisitor<Void> implements Process
                 processorUnits.getLR(), processorUnits.getStack()
         );
         pc = processorUnits.getPC();
-        bitFieldVisitor=new BitFieldVisitor(processorUnits.getRegisterFile(),processorUnits.getAPSR());
+        bitFieldVisitor=new BitFieldVisitor(processorUnits.getRegisterFile());
     }
 
     @Override

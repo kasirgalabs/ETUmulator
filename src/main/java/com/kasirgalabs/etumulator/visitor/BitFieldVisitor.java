@@ -23,13 +23,11 @@ import com.kasirgalabs.thumb2.ProcessorParser;
 
 public class BitFieldVisitor extends ProcessorBaseVisitor<Void> {
     private final RegisterFile registerFile;
-    private final APSR apsr;
     private final RegisterVisitor registerVisitor;
     private final NumberVisitor numberVisitor;
 
-    public BitFieldVisitor(RegisterFile registerFile, APSR apsr) {
+    public BitFieldVisitor(RegisterFile registerFile) {
         this.registerFile = registerFile;
-        this.apsr = apsr;
         registerVisitor = new RegisterVisitor();
         numberVisitor = new NumberVisitor();
     }
