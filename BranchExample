@@ -1,0 +1,38 @@
+        mov r0, 0
+        mov r1, 0
+        mov r2, 0
+        mov r3, 0
+        mov r4, 0
+        mov r5, 0
+        mov r6, 0
+        mov r7, 0
+        mov r8, 0
+        mov r9, 0
+        mov r10, 0
+        mov r11, 0
+        mov r12, 0
+//First  13 line is required because registers are not initialized when changing file.
+//It is advised to add first 13 line to your code.
+
+//C code to assemble.
+
+//int a = 30, b = 10;
+//if (a > b)
+//           a = a - b;
+//        else
+//           b = b - a;
+      
+
+//Can be demonstrated in assembly with this:
+        mov r0, 30
+        mov r1, 10
+gcd:
+        cmp      r0, r1
+        beq      end
+        blt      less
+        subs     r0, r0, r1   //r0 = r0 - r1
+        b        end
+less:
+        subs     r1, r1, r0   //could be SUB r1, r1, r0 for ARM
+        b        end
+end:

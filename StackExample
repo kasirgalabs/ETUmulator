@@ -1,0 +1,47 @@
+        mov r0, 0
+        mov r1, 0
+        mov r2, 0
+        mov r3, 0
+        mov r4, 0
+        mov r5, 0
+        mov r6, 0
+        mov r7, 0
+        mov r8, 0
+        mov r9, 0
+        mov r10, 0
+        mov r11, 0
+        mov r12, 0
+//First  13 line is required because registers are not initialized when changing file.
+//It is advised to add first 13 line to your code.
+
+
+
+mov r1, 100
+mov r2, 200
+mov r4, 400
+
+
+mov r3, 0xff    //255 in decimal. You can use hexadecimal, binary, ASCII notation as well.
+
+ push {r1, r4}           
+// r1 = 100. And it's value is safe thanks to stack.
+//You can see the values in the stack by choosing "Stack" on the left.
+//$0 now has r1's value.
+//$1 now has r2's value.
+
+push{r12}
+//$2 now has r12's value.
+
+push {r12}
+//$3 now has r12's value
+
+pop{r5}
+//r5 = $3
+
+pop{r6}
+//r6 = $2
+
+mvn r7, 0x10 //Takes it's compliment. 
+//mvn r1, OP2 means r1 = -OP2 -1
+
+

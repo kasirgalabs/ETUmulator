@@ -18,6 +18,7 @@ package com.kasirgalabs.etumulator.menu;
 
 import com.google.inject.Inject;
 import com.kasirgalabs.etumulator.document.Document;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -78,26 +79,23 @@ public class FileMenuController {
     }
 
 
-
+    //Examples.
     @FXML
-    public void openExampleOnAction(ActionEvent event) throws IOException {
-        File file = new File("Example");
+    public void openBranchExampleOnAction(ActionEvent event) throws IOException {
+        File file = new File("BranchExample");
         takeFileToText(file);
-        Label label = new Label("r1 = 0, r2 = 1000 is initial condition.\n Increases r1 until r1 = 1000. Loops this infinite times.");
+
     }
     @FXML
     public void openLoopExampleOnAction(ActionEvent event) throws IOException {
-        File file = new File("Loop");
+        File file = new File("LoopExample");
         takeFileToText(file);
     }
     @FXML
-    public void openInstructionsExampleOnAction(ActionEvent event) throws IOException {
-        File file = new File("Instructions");
+    public void openStackExampleOnAction(ActionEvent event) throws IOException {
+        File file = new File("StackExample");
         takeFileToText(file);
     }
-
-
-
 
 
 
@@ -159,18 +157,6 @@ public class FileMenuController {
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
