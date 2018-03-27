@@ -35,16 +35,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import java.io.OutputStream;
-import java.io.PrintStream;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javafx.application.Platform;
-import javafx.scene.control.TextArea;
 
 public class ETUmulator extends Application {
     @Inject

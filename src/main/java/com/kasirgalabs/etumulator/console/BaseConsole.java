@@ -44,10 +44,10 @@ public class BaseConsole extends TextArea implements Initializable, Console, Obs
         userName = System.getProperty("user.name");
         this.uart = uart;
     }
-    
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-       System.setErr(new PrintStream(new OutputStream() {
+        System.setErr(new PrintStream(new OutputStream() {
             @Override
             public void write(int b) {
                 Platform.runLater(() -> {
