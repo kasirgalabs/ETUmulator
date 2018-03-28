@@ -1,0 +1,33 @@
+        mov r0, 0
+        mov r1, 0
+        mov r2, 0
+        mov r3, 0
+        mov r4, 0
+        mov r5, 0
+        mov r6, 0
+        mov r7, 0
+        mov r8, 0
+        mov r9, 0
+        mov r10, 0
+        mov r11, 0
+        mov r12, 0
+//First  13 line is required because registers are not initialized when changing file.
+
+//A for loop demonstration in assemble.
+//for(int i = 0; i < 10000; i++);
+
+
+
+start:                    //That is a "LABEL"
+    mov r1, 0         //r0 = 0
+
+continue:            
+    mov r2, 10000
+    add r1, r1,1     //r1 = r1 + 1
+    cmp r1, r2       //This effects the branch instructions after this line. (bne, beq)
+
+    bne continue   //if(r1 != r2) goto continue
+    beq end           //if(r1 == r2) goto end
+end:
+    
+
