@@ -17,7 +17,7 @@ public class ReverseVisitor extends ProcessorBaseVisitor<Void> {
     public Void visitRbit(ProcessorParser.RbitContext ctx) {
         String destRegister = registerVisitor.visit(ctx.rd());
         int value = registerFile.getValue(registerVisitor.visit(ctx.rm()));
-        registerFile.setValue(destRegister, Integer.reverseBytes(value));
+        registerFile.setValue(destRegister, Integer.reverse(value));
         return null;
     }
 }
