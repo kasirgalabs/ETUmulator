@@ -97,5 +97,7 @@ public class BaseDocument implements Initializable, Document {
     }
 
     @Override
-    public void clear() { document.clear();}
+    public void clear() {
+        document.clear();
+    }
 }
