@@ -173,6 +173,14 @@ public class ShiftVisitor extends ProcessorBaseVisitor<Void> {
         return null;
     }
 
+    @Override
+    public Void visitRbit(ProcessorParser.RbitContext ctx) { //Until a Reversevisitor class is implemented Rbit is here.
+        String destRegister = registerVisitor.visit(ctx.rd());
+        int value = registerFile.getValue(registerVisitor.visit(ctx.rm()));
+        registerFile.setValue(destRegister, Integer.reverseBytes(value));
+        return null;
+    }
+
     private int shift(int value, Shift shiftOption, int shiftAmount) {
         switch(shiftOption) {
             case ASR:

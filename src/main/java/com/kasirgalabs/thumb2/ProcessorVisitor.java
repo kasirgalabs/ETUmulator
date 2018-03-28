@@ -293,6 +293,12 @@ public interface ProcessorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRrxs(ProcessorParser.RrxsContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ProcessorParser#rbit}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRbit(ProcessorParser.RbitContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ProcessorParser#cmp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

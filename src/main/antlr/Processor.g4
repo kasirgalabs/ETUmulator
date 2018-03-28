@@ -68,6 +68,7 @@ shift
     | rors
     | rrx
     | rrxs
+    | rbit
     ;
 
 compare
@@ -264,6 +265,10 @@ rrx
 
 rrxs
     : 'rrxs' rd COMMA rm
+    ;
+
+rbit
+    : 'rbit' rd COMMA rm
     ;
 
 cmp
@@ -572,16 +577,16 @@ asciz
     ;
 
 STRING
-	: DOUBLE_QUOTE CHARACTERS+ DOUBLE_QUOTE
-	;
+    : DOUBLE_QUOTE CHARACTERS+ DOUBLE_QUOTE
+    ;
 
 fragment CHARACTERS
-	: CHARACTER+
-	;
+    : CHARACTER+
+    ;
 
 fragment CHARACTER
-	: [ a-zA-Z0-9]
-	;
+    : [ a-zA-Z0-9]
+    ;
 
 number
     : DASH? (DECIMAL | HEX)
