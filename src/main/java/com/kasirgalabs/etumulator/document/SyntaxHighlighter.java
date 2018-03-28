@@ -13,16 +13,16 @@ import org.fxmisc.richtext.model.StyleSpansBuilder;
 
 public class SyntaxHighlighter {
     private static final String[] KEYWORDS = new String[]{
-        "add", "adds", "adc", "adcs", "sub", "subs", "sbc", "sbcs",
-        "rsb", "rsbs", "rsc", "rscs", "mul", "muls", "mla", "mlas",
-        "mls", "sdiv", "udiv", "mov", "movs", "mvn", "mvns", "movt",
-        "asr", "asrs", "lsl", "lsls", "lsr", "lsrs", "ror", "rors",
-        "rrx", "rrxs", "cmp", "cmn", "tst", "teq", "and", "ands",
-        "eor", "eors", "orr", "orrs", "orn", "orns", "bic", "bics",
-        "b", "beq", "bne", "bcs", "bhs", "bcc", "blo", "bmi",
-        "bpl", "bvs", "bvc", "bhi", "bls", "bge", "blt", "bgt",
-        "ble", "bal", "bl", "ldr", "ldrb", "ldrh", "str", "strb",
-        "strh", "push", "pop", "asciz", "bfc"
+            "add", "adds", "adc", "adcs", "sub", "subs", "sbc", "sbcs",
+            "rsb", "rsbs", "rsc", "rscs", "mul", "muls", "mla", "mlas",
+            "mls", "sdiv", "udiv", "mov", "movs", "mvn", "mvns", "movt",
+            "asr", "asrs", "lsl", "lsls", "lsr", "lsrs", "ror", "rors",
+            "rrx", "rrxs", "cmp", "cmn", "tst", "teq", "and", "ands",
+            "eor", "eors", "orr", "orrs", "orn", "orns", "bic", "bics",
+            "rbit", "b", "beq", "bne", "bcs", "bhs", "bcc", "blo",
+            "bmi", "bpl", "bvs", "bvc", "bhi", "bls", "bge", "blt",
+            "bgt", "ble", "bal", "bl", "ldr", "ldrb", "ldrh", "str",
+            "strb", "strh", "push", "pop", "asciz", "bfc"
     };
     private static final String KEYWORD_PATTERN = "\\b(" + String.join("|", KEYWORDS) + ")\\b";
     private static final String STRING_PATTERN = "\"([^\"\\\\]|\\\\.)*\"";

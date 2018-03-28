@@ -65,6 +65,12 @@ public interface AssemblerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLogical(AssemblerParser.LogicalContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link AssemblerParser#reverse}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReverse(AssemblerParser.ReverseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link AssemblerParser#branch}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -376,6 +382,12 @@ public interface AssemblerVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBics(AssemblerParser.BicsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AssemblerParser#rbit}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRbit(AssemblerParser.RbitContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link AssemblerParser#b}.
 	 * @param ctx the parse tree

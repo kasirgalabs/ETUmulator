@@ -17,6 +17,7 @@ instruction
     | shift
     | compare
     | logical
+    | reverse
     | branch
     | singleDataMemory
     | stack
@@ -88,6 +89,10 @@ logical
     | orns
     | bic
     | bics
+    ;
+
+reverse
+    : rbit
     ;
 
 branch
@@ -320,6 +325,10 @@ bic
 
 bics
     : 'bics' rd COMMA rn COMMA operand2
+    ;
+
+rbit
+    : 'rbit' rd COMMA rm
     ;
 
 b
@@ -572,16 +581,16 @@ asciz
     ;
 
 STRING
-	: DOUBLE_QUOTE CHARACTERS+ DOUBLE_QUOTE
-	;
+    : DOUBLE_QUOTE CHARACTERS+ DOUBLE_QUOTE
+    ;
 
 fragment CHARACTERS
-	: CHARACTER+
-	;
+    : CHARACTER+
+    ;
 
 fragment CHARACTER
-	: [ a-zA-Z0-9]
-	;
+    : [ a-zA-Z0-9]
+    ;
 
 number
     : DASH? (DECIMAL | HEX)
