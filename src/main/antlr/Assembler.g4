@@ -17,6 +17,7 @@ instruction
     | shift
     | compare
     | logical
+    | reverse
     | branch
     | singleDataMemory
     | stack
@@ -68,7 +69,6 @@ shift
     | rors
     | rrx
     | rrxs
-    | rbit
     ;
 
 compare
@@ -89,6 +89,10 @@ logical
     | orns
     | bic
     | bics
+    ;
+
+reverse
+    : rbit
     ;
 
 branch
@@ -267,10 +271,6 @@ rrxs
     : 'rrxs' rd COMMA rm
     ;
 
-rbit
-    : 'rbit' rd COMMA rm
-    ;
-
 cmp
     : 'cmp' rn COMMA operand2
     ;
@@ -325,6 +325,10 @@ bic
 
 bics
     : 'bics' rd COMMA rn COMMA operand2
+    ;
+
+rbit
+    : 'rbit' rd COMMA rm
     ;
 
 b

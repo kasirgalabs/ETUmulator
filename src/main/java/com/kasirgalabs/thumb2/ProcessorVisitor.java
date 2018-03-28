@@ -65,6 +65,12 @@ public interface ProcessorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLogical(ProcessorParser.LogicalContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link ProcessorParser#reverse}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReverse(ProcessorParser.ReverseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link ProcessorParser#branch}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -293,12 +299,6 @@ public interface ProcessorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRrxs(ProcessorParser.RrxsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ProcessorParser#rbit}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitRbit(ProcessorParser.RbitContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link ProcessorParser#cmp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -382,6 +382,12 @@ public interface ProcessorVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBics(ProcessorParser.BicsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ProcessorParser#rbit}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRbit(ProcessorParser.RbitContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ProcessorParser#b}.
 	 * @param ctx the parse tree

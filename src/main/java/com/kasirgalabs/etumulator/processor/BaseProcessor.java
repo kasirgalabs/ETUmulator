@@ -17,7 +17,17 @@
 package com.kasirgalabs.etumulator.processor;
 
 import com.kasirgalabs.etumulator.lang.Linker.ExecutableCode;
-import com.kasirgalabs.etumulator.visitor.*;
+import com.kasirgalabs.etumulator.visitor.ArithmeticVisitor;
+import com.kasirgalabs.etumulator.visitor.BitFieldVisitor;
+import com.kasirgalabs.etumulator.visitor.BranchVisitor;
+import com.kasirgalabs.etumulator.visitor.CompareVisitor;
+import com.kasirgalabs.etumulator.visitor.LogicalVisitor;
+import com.kasirgalabs.etumulator.visitor.MoveVisitor;
+import com.kasirgalabs.etumulator.visitor.MultiplyAndDivideVisitor;
+import com.kasirgalabs.etumulator.visitor.ReverseVisitor;
+import com.kasirgalabs.etumulator.visitor.ShiftVisitor;
+import com.kasirgalabs.etumulator.visitor.SingleDataMemoryVisitor;
+import com.kasirgalabs.etumulator.visitor.StackVisitor;
 import com.kasirgalabs.thumb2.ProcessorBaseVisitor;
 import com.kasirgalabs.thumb2.ProcessorLexer;
 import com.kasirgalabs.thumb2.ProcessorParser;
@@ -31,6 +41,7 @@ public class BaseProcessor extends ProcessorBaseVisitor<Void> implements Process
     private final ShiftVisitor shiftVisitor;
     private final CompareVisitor compareVisitor;
     private final LogicalVisitor logicalVisitor;
+    private final ReverseVisitor reverseVisitor;
     private final BranchVisitor branchVisitor;
     private final SingleDataMemoryVisitor singleDataMemoryVisitor;
     private final StackVisitor stackVisitor;
@@ -48,6 +59,7 @@ public class BaseProcessor extends ProcessorBaseVisitor<Void> implements Process
                 processorUnits.getAPSR());
         logicalVisitor = new LogicalVisitor(processorUnits.getRegisterFile(),
                 processorUnits.getAPSR());
+        reverseVisitor = new ReverseVisitor(processorUnits.getRegisterFile());
         branchVisitor = new BranchVisitor(processorUnits.getAPSR(), processorUnits.getUART(),
                 processorUnits.getPC(), processorUnits.getLR());
         singleDataMemoryVisitor = new SingleDataMemoryVisitor(processorUnits.getRegisterFile(),
@@ -87,6 +99,11 @@ public class BaseProcessor extends ProcessorBaseVisitor<Void> implements Process
     @Override
     public Void visitLogical(ProcessorParser.LogicalContext ctx) {
         return logicalVisitor.visit(ctx);
+    }
+
+    @Override
+    public Void visitReverse(ProcessorParser.ReverseContext ctx) {
+        return reverseVisitor.visit(ctx);
     }
 
     @Override
