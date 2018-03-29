@@ -1,0 +1,6 @@
+plugins:
+  sonar-java:
+    enabled: true
+    config:
+      sonar.java.source: 8
+
