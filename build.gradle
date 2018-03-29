@@ -38,7 +38,7 @@ tasks.withType(Test) {
         showStackTraces = true
         showStandardStreams = true
         afterSuite { desc, result ->
-            if(!desc.parent) {
+            if (!desc.parent) {
                 def output = "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
                 def startItem = "|  ", endItem = "  |"
                 def repeatLength = startItem.length() + output.length() + endItem.length()
@@ -57,8 +57,8 @@ pmd {
 
 tasks.withType(Pmd) {
     reports {
-        html.enabled true
-        xml.enabled true
+        html.enabled = true
+        xml.enabled = true
     }
 }
 
@@ -89,7 +89,7 @@ generateGrammarSource {
     }
 }
 
-task uploadCoverageToCodacy(type: JavaExec, dependsOn : jacocoTestReport) {
+task uploadCoverageToCodacy(type: JavaExec, dependsOn: jacocoTestReport) {
     main = "com.codacy.CodacyCoverageReporter"
     classpath = configurations.codacy
     args = [
@@ -121,15 +121,24 @@ jacoco {
 jacocoTestReport {
     afterEvaluate {
         classDirectories = files(
-            classDirectories.files.collect {
-                fileTree(dir: it, exclude: "com/kasirgalabs/thumb2/**")
-            })
+                classDirectories.files.collect {
+                    fileTree(dir: it, exclude: "com/kasirgalabs/thumb2/**")
+                })
     }
     reports {
-        html.enabled true
-        xml.enabled true
-        csv.enabled true
+        html.enabled = true
+        xml.enabled = true
+        csv.enabled = true
     }
+}
+
+task codeClimate(type: Copy, dependsOn: jacocoTestReport) {
+    from 'build/reports/jacoco/test/jacocoTestReport.xml'
+    into '.'
+    rename { String fileName ->
+        fileName.replace("jacocoTestReport.xml", "jacoco.xml")
+    }
+    filter { line -> line.replaceAll("com/", "src/main/java/com/") }
 }
 
 task wrapper(type: Wrapper) {
