@@ -74,10 +74,13 @@ public class GUISafeProcessor extends BaseProcessor implements Callable<Void> {
     public Void call() {
         try {
             super.run(executableCode);
-        }catch(Exception ex) { 
+        } catch (CancellationException ex) {
+        } catch (Exception ex) {
             PopUp p = new PopUp();
             p.exceptionStacktraceToString(ex);
-            Platform.runLater(() -> { p.createPopup();}); 
+            Platform.runLater(() -> {
+                p.createPopup();
+            });
         }
         return null;
     }
