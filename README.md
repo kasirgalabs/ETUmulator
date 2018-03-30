@@ -64,8 +64,3 @@ Open a terminal in the root of the project directory, then execute the command:
 ```
 ./gradlew check
 ```
-WINDOWS INTEGRATION PROCESS
-Ngrok server installed.
-Jenkins integration installed.
-Windows Integration added at Jenkins
-.
