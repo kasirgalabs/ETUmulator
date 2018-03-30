@@ -1,0 +1,13 @@
+Windows integration added on jenkins
+
+link:http://18ce9130.ngrok.io/
+
+
+
+
+-tools used-
+https://ngrok.com/
+https://jenkins.io/
+https://wiki.jenkins.io/display/JENKINS/GitHub+Plugin
+https://wiki.jenkins.io/display/JENKINS/Git+Plugin
+https://wiki.jenkins.io/display/JENKINS/Gradle+Plugin
