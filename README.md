@@ -1,8 +1,6 @@
-
-
 <p align="center">
   <a title="Build Status" href="https://travis-ci.org/kasirgalabs/ETUmulator"><img src="https://travis-ci.org/kasirgalabs/ETUmulator.svg?branch=master"></a>
-  <a title="Windows Build Status:" href='http://0612aae3.ngrok.io/job/ETUmulator'><img src='http://0612aae3.ngrok.io/job/ETUmulator/badge/icon'></a>
+  <a title=Windows Build Status:" href='http://0612aae3.ngrok.io/job/ETUmulator'><img src='http://0612aae3.ngrok.io/buildStatus/icon?job=ETUmulator'></a>
   <a title="Coverage" href="https://www.codacy.com/app/RootG/ETUmulator?utm_source=github.com&utm_medium=referral&utm_content=kasirgalabs/ETUmulator&utm_campaign=Badge_Coverage"><img src="https://api.codacy.com/project/badge/Coverage/b79a64268c3b4ab38699a5780e773302"></a>
   <a title="Grade" href="https://www.codacy.com/app/RootG/ETUmulator?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kasirgalabs/ETUmulator&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/b79a64268c3b4ab38699a5780e773302"></a>
   <a title="Dependency Status" href="https://www.versioneye.com/user/projects/58b1886d7b9e15004de85395"><img src="https://www.versioneye.com/user/projects/58b1886d7b9e15004de85395/badge.svg?style=flat-square"></a>
@@ -67,3 +65,4 @@ Open a terminal in the root of the project directory, then execute the command:
 ```
 ./gradlew check
 ```
+
