@@ -18,16 +18,15 @@ package com.kasirgalabs.etumulator.processor;
 
 import com.kasirgalabs.etumulator.lang.Linker.ExecutableCode;
 import com.kasirgalabs.etumulator.visitor.ArithmeticVisitor;
-import com.kasirgalabs.etumulator.visitor.BitFieldVisitor;
 import com.kasirgalabs.etumulator.visitor.BranchVisitor;
 import com.kasirgalabs.etumulator.visitor.CompareVisitor;
 import com.kasirgalabs.etumulator.visitor.LogicalVisitor;
 import com.kasirgalabs.etumulator.visitor.MoveVisitor;
 import com.kasirgalabs.etumulator.visitor.MultiplyAndDivideVisitor;
-import com.kasirgalabs.etumulator.visitor.ReverseVisitor;
 import com.kasirgalabs.etumulator.visitor.ShiftVisitor;
 import com.kasirgalabs.etumulator.visitor.SingleDataMemoryVisitor;
 import com.kasirgalabs.etumulator.visitor.StackVisitor;
+import com.kasirgalabs.etumulator.visitor.BitFieldVisitor;
 import com.kasirgalabs.thumb2.ProcessorBaseVisitor;
 import com.kasirgalabs.thumb2.ProcessorLexer;
 import com.kasirgalabs.thumb2.ProcessorParser;
@@ -41,7 +40,6 @@ public class BaseProcessor extends ProcessorBaseVisitor<Void> implements Process
     private final ShiftVisitor shiftVisitor;
     private final CompareVisitor compareVisitor;
     private final LogicalVisitor logicalVisitor;
-    private final ReverseVisitor reverseVisitor;
     private final BranchVisitor branchVisitor;
     private final SingleDataMemoryVisitor singleDataMemoryVisitor;
     private final StackVisitor stackVisitor;
@@ -59,7 +57,6 @@ public class BaseProcessor extends ProcessorBaseVisitor<Void> implements Process
                 processorUnits.getAPSR());
         logicalVisitor = new LogicalVisitor(processorUnits.getRegisterFile(),
                 processorUnits.getAPSR());
-        reverseVisitor = new ReverseVisitor(processorUnits.getRegisterFile());
         branchVisitor = new BranchVisitor(processorUnits.getAPSR(), processorUnits.getUART(),
                 processorUnits.getPC(), processorUnits.getLR());
         singleDataMemoryVisitor = new SingleDataMemoryVisitor(processorUnits.getRegisterFile(),
@@ -68,7 +65,7 @@ public class BaseProcessor extends ProcessorBaseVisitor<Void> implements Process
                 processorUnits.getLR(), processorUnits.getStack()
         );
         pc = processorUnits.getPC();
-        bitFieldVisitor=new BitFieldVisitor(processorUnits.getRegisterFile());
+	bitFieldVisitor = new BitFieldVisitor(processorUnits.getRegisterFile(), processorUnits.getAPSR());
     }
 
     @Override
@@ -102,11 +99,6 @@ public class BaseProcessor extends ProcessorBaseVisitor<Void> implements Process
     }
 
     @Override
-    public Void visitReverse(ProcessorParser.ReverseContext ctx) {
-        return reverseVisitor.visit(ctx);
-    }
-
-    @Override
     public Void visitBranch(ProcessorParser.BranchContext ctx) {
         return branchVisitor.visit(ctx);
     }
@@ -117,19 +109,20 @@ public class BaseProcessor extends ProcessorBaseVisitor<Void> implements Process
     }
 
     @Override
-    public Void visitBitfield(ProcessorParser.BitfieldContext ctx){ return bitFieldVisitor.visit(ctx); }
-
-    @Override
     public Void visitStack(ProcessorParser.StackContext ctx) {
         return stackVisitor.visit(ctx);
+    }
+
+//    @Override
+    public Void visitBitField(ProcessorParser.BitFieldContext ctx) {
+	return bitFieldVisitor.visit(ctx);
     }
 
     @Override
     public void run(ExecutableCode executableCode) {
         pc.setValue(0);
         final String[] instructions = executableCode.getCode();
-        Breakpoint point = Breakpoint.getInstance();
-        while(pc.getValue() < instructions.length && (point.getPoint() != pc.getValue())) {
+        while(pc.getValue() < instructions.length) {
             if(pc.getValue() < 0) {
                 throw new IllegalPCException("PC can not be negative.");
             }

@@ -27,7 +27,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import javafx.application.Platform;
 
 @Singleton
 public class GUISafeProcessor extends BaseProcessor implements Callable<Void> {
@@ -70,17 +69,17 @@ public class GUISafeProcessor extends BaseProcessor implements Callable<Void> {
     public void terminate() {
         executor.shutdownNow();
     }
+
     @Override
     public Void call() {
         try {
             super.run(executableCode);
-        } catch (CancellationException ex) {
-        } catch (Exception ex) {
-            PopUp p = new PopUp();
-            p.exceptionStacktraceToString(ex);
-            Platform.runLater(() -> {
-                p.createPopup();
-            });
+        } catch(IllegalPCException ex) {
+            System.err.println(ex.getMessage());
+            throw ex;
+        } catch(CancellationException ex) {
+        } catch(Throwable ex) {
+            ex.printStackTrace();
         }
         return null;
     }

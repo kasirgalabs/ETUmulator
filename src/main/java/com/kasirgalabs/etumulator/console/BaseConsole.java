@@ -20,7 +20,6 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.kasirgalabs.etumulator.processor.UART;
 import com.kasirgalabs.etumulator.util.Observer;
-import com.kasirgalabs.etumulator.processor.Breakpoint;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.URL;
@@ -29,19 +28,15 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 @Singleton
 public class BaseConsole extends TextArea implements Initializable, Console, Observer {
     private final String userName;
     private boolean readEnable;
-    private boolean pointEnable;
     private char readChar;
     @FXML
     private VBox vbox;
-    @FXML
-    private TextField point;
     private final UART uart;
 
     @Inject
@@ -61,11 +56,10 @@ public class BaseConsole extends TextArea implements Initializable, Console, Obs
             }
         }));
         readEnable = false;
-        pointEnable = false;
         setText(userName + "@ETUmulator: ");
         uart.addObserver(this);
         vbox.getChildren().add(this);
-   }
+    }
 
     @Override
     public void update(Class<?> clazz, Object arg) {
@@ -108,16 +102,5 @@ public class BaseConsole extends TextArea implements Initializable, Console, Obs
     public void clearArea() {
         this.clear();
         setText(userName + "@ETUmulator: ");
-    }
-
-    @FXML
-    public void setBreakpoint() {
-        Breakpoint breakpoint = Breakpoint.getInstance();
-        pointEnable=!pointEnable;
-        if(pointEnable) {
-          breakpoint.setPoint(Integer.parseInt(point.getText()));
-        }else {
-          breakpoint.reset();
-        }
     }
 }
