@@ -133,6 +133,7 @@ stack
 
 bitfield
     : bfc
+    | bfi
     ;
 
 add
@@ -507,7 +508,9 @@ shiftOption
     | 'asr'
     | 'ror'
     ;
-
+bfi
+    : 'bfi' rd COMMA rn COMMA imm16 COMMA imm8
+    ;
 
 bfc
     : 'bfc' rd COMMA lsb COMMA width
@@ -538,6 +541,10 @@ imm16
     ;
 
 imm12
+    : number
+    ;
+
+imm8
     : number
     ;
 

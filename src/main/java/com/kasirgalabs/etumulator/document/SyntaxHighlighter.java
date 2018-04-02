@@ -22,7 +22,7 @@ public class SyntaxHighlighter {
             "rbit", "b", "beq", "bne", "bcs", "bhs", "bcc", "blo",
             "bmi", "bpl", "bvs", "bvc", "bhi", "bls", "bge", "blt",
             "bgt", "ble", "bal", "bl", "ldr", "ldrb", "ldrh", "str",
-            "strb", "strh", "push", "pop", "asciz", "bfc"
+            "strb", "strh", "push", "pop", "asciz", "bfc" , "bfi"
     };
     private static final String KEYWORD_PATTERN = "\\b(" + String.join("|", KEYWORDS) + ")\\b";
     private static final String STRING_PATTERN = "\"([^\"\\\\]|\\\\.)*\"";

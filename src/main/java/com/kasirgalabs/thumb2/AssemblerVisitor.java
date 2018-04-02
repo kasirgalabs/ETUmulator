@@ -641,6 +641,12 @@ public interface AssemblerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitShiftOption(AssemblerParser.ShiftOptionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link AssemblerParser#bfi}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBfi(AssemblerParser.BfiContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link AssemblerParser#bfc}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -688,6 +694,12 @@ public interface AssemblerVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitImm12(AssemblerParser.Imm12Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link AssemblerParser#imm8}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImm8(AssemblerParser.Imm8Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link AssemblerParser#imm8m}.
 	 * @param ctx the parse tree

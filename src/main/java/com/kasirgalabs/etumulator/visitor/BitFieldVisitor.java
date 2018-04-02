@@ -44,4 +44,35 @@ public class BitFieldVisitor extends ProcessorBaseVisitor<Void> {
         registerFile.setValue(destRegister, registerFile.getValue(destRegister) & bitClearValue);
         return null;
     }
+
+    public Void visitBitField(ProcessorParser.BfiContext ctx) {
+        String destRegister = registerVisitor.visit(ctx.rd());
+        int srcRegister =  registerFile.getValue(registerVisitor.visit(ctx.rn()));
+        int lsbPositionValue;
+        int widthValue;
+        int bitMaskValue;
+        int value;
+
+        if(ctx.imm16() != null) {
+            lsbPositionValue = numberVisitor.visit(ctx.imm16());
+        }
+        if(ctx.imm8() != null) {
+            widthValue = numberVisitor.visit(ctx.imm8());
+        }
+
+//        bitMaskValue = convertIntoToHex(widthValue);
+//        srcRegister &= bitMaskValue;
+//        value = srcRegister << lsbPositionValue;
+
+//	    registerFile.setValue(destRegister, value);
+            return null;
+        }
+
+    public int convertIntoToHex(int IntValue)
+	{
+		int HexValue = 0;
+                //HexValue = IntValue
+
+		return HexValue;
+	}
 }
