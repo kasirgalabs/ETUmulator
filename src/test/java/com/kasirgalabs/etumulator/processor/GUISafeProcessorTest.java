@@ -26,7 +26,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import javafx.embed.swing.JFXPanel;
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class GUISafeProcessorTest {
@@ -53,9 +52,8 @@ public class GUISafeProcessorTest {
      * @throws java.util.concurrent.TimeoutException
      */
     @Test
-    @Ignore
     public void testRun() throws InterruptedException, ExecutionException, TimeoutException {
-/*        new JFXPanel();
+        new JFXPanel();
         String code = "nop\n"
                 + "nop\n"
                 + "nop\n";
@@ -115,6 +113,6 @@ public class GUISafeProcessorTest {
             processor.waitForComplete(5, TimeUnit.SECONDS);
             fail("GUISafeProcessor should throw exception when PC is negative.");
         } catch(ExecutionException ex) {
-        }*/
+        }
     }
 }

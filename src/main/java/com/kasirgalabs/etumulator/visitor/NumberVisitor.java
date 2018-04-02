@@ -27,6 +27,11 @@ public class NumberVisitor extends ProcessorBaseVisitor<Integer> {
     }
 
     @Override
+    public Integer visitImm8(ProcessorParser.Imm8Context ctx) {
+        return visitNumber(ctx.number());
+    }
+
+    @Override
     public Integer visitImm12(ProcessorParser.Imm12Context ctx) {
         return visitNumber(ctx.number());
     }
@@ -38,16 +43,6 @@ public class NumberVisitor extends ProcessorBaseVisitor<Integer> {
 
     @Override
     public Integer visitSh(ProcessorParser.ShContext ctx) {
-        return visitNumber(ctx.number());
-    }
-
-    @Override
-    public Integer visitLsb(ProcessorParser.LsbContext ctx) {
-        return visitNumber(ctx.number());
-    }
-
-    @Override
-    public Integer visitWidth(ProcessorParser.WidthContext ctx) {
         return visitNumber(ctx.number());
     }
 

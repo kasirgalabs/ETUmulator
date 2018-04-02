@@ -65,12 +65,6 @@ public interface AssemblerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLogical(AssemblerParser.LogicalContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link AssemblerParser#reverse}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitReverse(AssemblerParser.ReverseContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link AssemblerParser#branch}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -89,11 +83,17 @@ public interface AssemblerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStack(AssemblerParser.StackContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link AssemblerParser#bitfield}.
+	 * Visit a parse tree produced by {@link AssemblerParser#bitField}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBitfield(AssemblerParser.BitfieldContext ctx);
+	T visitBitField(AssemblerParser.BitFieldContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AssemblerParser#bfi}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBfi(AssemblerParser.BfiContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link AssemblerParser#add}.
 	 * @param ctx the parse tree
@@ -383,12 +383,6 @@ public interface AssemblerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBics(AssemblerParser.BicsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link AssemblerParser#rbit}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitRbit(AssemblerParser.RbitContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link AssemblerParser#b}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -641,24 +635,6 @@ public interface AssemblerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitShiftOption(AssemblerParser.ShiftOptionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link AssemblerParser#bfc}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBfc(AssemblerParser.BfcContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link AssemblerParser#lsb}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLsb(AssemblerParser.LsbContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link AssemblerParser#width}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWidth(AssemblerParser.WidthContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link AssemblerParser#opsh}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -688,6 +664,12 @@ public interface AssemblerVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitImm12(AssemblerParser.Imm12Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link AssemblerParser#imm8}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImm8(AssemblerParser.Imm8Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link AssemblerParser#imm8m}.
 	 * @param ctx the parse tree

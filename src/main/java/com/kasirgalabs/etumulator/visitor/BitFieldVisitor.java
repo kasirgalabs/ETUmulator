@@ -16,32 +16,54 @@
  */
 package com.kasirgalabs.etumulator.visitor;
 
+import com.kasirgalabs.etumulator.processor.APSR;
 import com.kasirgalabs.etumulator.processor.RegisterFile;
 import com.kasirgalabs.thumb2.ProcessorBaseVisitor;
 import com.kasirgalabs.thumb2.ProcessorParser;
 
 public class BitFieldVisitor extends ProcessorBaseVisitor<Void> {
     private final RegisterFile registerFile;
+    private final APSR apsr;
     private final RegisterVisitor registerVisitor;
     private final NumberVisitor numberVisitor;
 
-    public BitFieldVisitor(RegisterFile registerFile) {
+    public BitFieldVisitor(RegisterFile registerFile, APSR apsr) {
         this.registerFile = registerFile;
+        this.apsr = apsr;
         registerVisitor = new RegisterVisitor();
         numberVisitor = new NumberVisitor();
     }
 
-    @Override
-    public Void visitBfc(ProcessorParser.BfcContext ctx) {
+
+    public Void visitBitField(ProcessorParser.BfiContext ctx) {
         String destRegister = registerVisitor.visit(ctx.rd());
-        int lsb=numberVisitor.visit(ctx.lsb());
-        int width=numberVisitor.visit(ctx.width());
-        int bitClearValue=0;
-        for(int i=lsb;i<lsb+width;i++){
-            bitClearValue+=1<<i;
+        int srcRegister =  registerFile.getValue(registerVisitor.visit(ctx.rn()));
+        int lsbPositionValue;
+        int widthValue;
+        int bitMaskValue;
+        int value;
+
+        if(ctx.imm16() != null) {
+            lsbPositionValue = numberVisitor.visit(ctx.imm16());
         }
-        bitClearValue=~bitClearValue;
-        registerFile.setValue(destRegister, registerFile.getValue(destRegister) & bitClearValue);
-        return null;
-    }
+        if(ctx.imm8() != null) {
+            widthValue = numberVisitor.visit(ctx.imm8());
+        }
+
+//        bitMaskValue = convertIntoToHex(widthValue);
+//        srcRegister &= bitMaskValue;
+//        value = srcRegister << lsbPositionValue;
+
+//        registerFile.setValue(destRegister, value);
+            return null;
+        }
+
+    public int convertIntoToHex(int IntValue)
+	{
+		int HexValue = 0;
+                //HexValue = IntValue
+
+		return HexValue;
+	}
 }
+

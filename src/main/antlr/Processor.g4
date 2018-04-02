@@ -17,11 +17,10 @@ instruction
     | shift
     | compare
     | logical
-    | reverse
     | branch
     | singleDataMemory
     | stack
-    | bitfield
+    | bitField
     | 'nop'
     ;
 
@@ -91,10 +90,6 @@ logical
     | bics
     ;
 
-reverse
-    : rbit
-    ;
-
 branch
     : b
     | beq
@@ -131,8 +126,8 @@ stack
     | pop
     ;
 
-bitfield
-    : bfc
+bitField
+    : bfi
     ;
 
 add
@@ -319,16 +314,16 @@ orns
     : 'orns' rd COMMA rn COMMA operand2
     ;
 
+bfi
+    : 'bfi' rd COMMA rn COMMA imm16 COMMA imm8
+    ;
+
 bic
     : 'bic' rd COMMA rn COMMA operand2
     ;
 
 bics
     : 'bics' rd COMMA rn COMMA operand2
-    ;
-
-rbit
-    : 'rbit' rd COMMA rm
     ;
 
 b
@@ -504,18 +499,6 @@ shiftOption
     | 'ror'
     ;
 
-bfc
-    : 'bfc' rd COMMA lsb COMMA width
-    ;
-
-lsb
-    : number
-    ;
-
-width
-    : number
-    ;
-
 opsh
     : 'lsl' sh
     ;
@@ -537,6 +520,10 @@ imm12
     ;
 
 imm8m
+    : number
+    ;
+
+imm8
     : number
     ;
 
@@ -581,16 +568,16 @@ asciz
     ;
 
 STRING
-    : DOUBLE_QUOTE CHARACTERS+ DOUBLE_QUOTE
-    ;
+	: DOUBLE_QUOTE CHARACTERS+ DOUBLE_QUOTE
+	;
 
 fragment CHARACTERS
-    : CHARACTER+
-    ;
+	: CHARACTER+
+	;
 
 fragment CHARACTER
-    : [ a-zA-Z0-9]
-    ;
+	: [ a-zA-Z0-9]
+	;
 
 number
     : DASH? (DECIMAL | HEX)
