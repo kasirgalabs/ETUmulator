@@ -54,10 +54,10 @@ public class BitFieldVisitor extends ProcessorBaseVisitor<Void> {
         int value;
 
         if(ctx.imm16() != null) {
-            lsbPositionValue = numberVisitor.visit(ctx.imm16());
+            lsbPositionValue = numberVisitor.visit(ctx.lsb());
         }
         if(ctx.imm8() != null) {
-            widthValue = numberVisitor.visit(ctx.imm8());
+            widthValue = numberVisitor.visit(ctx.width());
         }
 
 //        bitMaskValue = convertIntoToHex(widthValue);
@@ -68,11 +68,11 @@ public class BitFieldVisitor extends ProcessorBaseVisitor<Void> {
             return null;
         }
 
-    public int convertIntoToHex(int IntValue)
+    public int convertIntoToHex(int intValue)
 	{
-		int HexValue = 0;
+		int hexValue = 0;
                 //HexValue = IntValue
 
-		return HexValue;
+		return hexValue;
 	}
 }

@@ -506,7 +506,7 @@ shiftOption
     ;
 
 bfi
-    : 'bfi' rd COMMA rn COMMA imm16 COMMA imm8
+    : 'bfi' rd COMMA rn COMMA lsb COMMA width
     ;
 
 bfc
@@ -538,10 +538,6 @@ imm16
     ;
 
 imm12
-    : number
-    ;
-
-imm8
     : number
     ;
 
