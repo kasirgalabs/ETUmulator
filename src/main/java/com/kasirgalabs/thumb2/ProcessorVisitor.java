@@ -689,12 +689,6 @@ public interface ProcessorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitImm12(ProcessorParser.Imm12Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link ProcessorParser#imm8}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitImm8(ProcessorParser.Imm8Context ctx);
-	/**
 	 * Visit a parse tree produced by {@link ProcessorParser#imm8m}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

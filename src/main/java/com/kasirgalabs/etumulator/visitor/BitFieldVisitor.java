@@ -53,10 +53,10 @@ public class BitFieldVisitor extends ProcessorBaseVisitor<Void> {
         int bitMaskValue;
         int value;
 
-        if(ctx.imm16() != null) {
+        if(ctx.lsb() != null) {
             lsbPositionValue = numberVisitor.visit(ctx.lsb());
         }
-        if(ctx.imm8() != null) {
+        if(ctx.width() != null) {
             widthValue = numberVisitor.visit(ctx.width());
         }
 

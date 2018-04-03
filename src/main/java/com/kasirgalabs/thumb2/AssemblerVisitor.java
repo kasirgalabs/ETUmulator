@@ -695,12 +695,6 @@ public interface AssemblerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitImm12(AssemblerParser.Imm12Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link AssemblerParser#imm8}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitImm8(AssemblerParser.Imm8Context ctx);
-	/**
 	 * Visit a parse tree produced by {@link AssemblerParser#imm8m}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

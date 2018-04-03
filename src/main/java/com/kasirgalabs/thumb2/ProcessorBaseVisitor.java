@@ -808,13 +808,6 @@ public class ProcessorBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitImm8(ProcessorParser.Imm8Context ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitImm8m(ProcessorParser.Imm8mContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
