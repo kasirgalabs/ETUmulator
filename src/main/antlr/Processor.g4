@@ -133,6 +133,7 @@ stack
 
 bitfield
     : bfc
+    | bfi
     ;
 
 add
@@ -506,6 +507,10 @@ shiftOption
 
 bfc
     : 'bfc' rd COMMA lsb COMMA width
+    ;
+
+bfi
+    : 'bfi' rd COMMA rn COMMA lsb COMMA width
     ;
 
 lsb
