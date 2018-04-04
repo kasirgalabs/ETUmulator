@@ -45,34 +45,25 @@ public class BitFieldVisitor extends ProcessorBaseVisitor<Void> {
         return null;
     }
 
-    public Void visitBitField(ProcessorParser.BfiContext ctx) {
+    public Void visitBfi(ProcessorParser.BfiContext ctx) {
         String destRegister = registerVisitor.visit(ctx.rd());
-        int srcRegister =  registerFile.getValue(registerVisitor.visit(ctx.rn()));
-        int lsbPositionValue;
-        int widthValue;
-        int bitMaskValue;
-        int value;
-
-        if(ctx.lsb() != null) {
-            lsbPositionValue = numberVisitor.visit(ctx.lsb());
+        int left = registerFile.getValue(registerVisitor.visit(ctx.rd()));
+        int right = registerFile.getValue(registerVisitor.visit(ctx.rn()));
+        int width = numberVisitor.visit(ctx.width());
+        int lsb = numberVisitor.visit(ctx.lsb());
+        int bitFieldClearValue = 0;
+        for (int i = lsb; i < lsb + width; i++) {
+            bitFieldClearValue += 1 << i;
         }
-        if(ctx.width() != null) {
-            widthValue = numberVisitor.visit(ctx.width());
+        left = left & bitFieldClearValue;
+        right = right << lsb;
+        for (int i = 0; i < lsb; i++) {
+            right = right & ~(1 << i);
         }
-
-//        bitMaskValue = convertIntoToHex(widthValue);
-//        srcRegister &= bitMaskValue;
-//        value = srcRegister << lsbPositionValue;
-
-//	    registerFile.setValue(destRegister, value);
-            return null;
+        for (int i = width + lsb; i < 32; i++) {
+            right = right & ~(1 << i);
         }
-
-    public int convertIntoToHex(int intValue)
-	{
-		int hexValue = 0;
-                //HexValue = IntValue
-
-		return hexValue;
-	}
+        registerFile.setValue(destRegister, left | right);
+        return null;
+    }
 }
