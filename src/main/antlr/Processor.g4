@@ -505,12 +505,12 @@ shiftOption
     | 'ror'
     ;
 
-bfi
-    : 'bfi' rd COMMA rn COMMA lsb COMMA width
-    ;
-
 bfc
     : 'bfc' rd COMMA lsb COMMA width
+    ;
+
+bfi
+    : 'bfi' rd COMMA rn COMMA lsb COMMA width
     ;
 
 lsb

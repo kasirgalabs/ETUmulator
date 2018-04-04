@@ -508,12 +508,13 @@ shiftOption
     | 'asr'
     | 'ror'
     ;
-bfi
-    : 'bfi' rd COMMA rn COMMA lsb COMMA width
-    ;
 
 bfc
     : 'bfc' rd COMMA lsb COMMA width
+    ;
+
+bfi
+    : 'bfi' rd COMMA rn COMMA lsb COMMA width
     ;
 
 lsb
@@ -543,7 +544,6 @@ imm16
 imm12
     : number
     ;
-
 
 imm8m
     : number

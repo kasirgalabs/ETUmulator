@@ -54,8 +54,8 @@ public class ProcessorParser extends Parser {
 		RULE_registerOffset = 91, RULE_postIndexedRegister = 92, RULE_push = 93, 
 		RULE_pop = 94, RULE_regList = 95, RULE_rd = 96, RULE_rn = 97, RULE_rm = 98, 
 		RULE_rs = 99, RULE_operand2 = 100, RULE_registerShiftedByRegister = 101, 
-		RULE_registerShiftedByConstant = 102, RULE_shiftOption = 103, RULE_bfi = 104, 
-		RULE_bfc = 105, RULE_lsb = 106, RULE_width = 107, RULE_opsh = 108, RULE_sh = 109, 
+		RULE_registerShiftedByConstant = 102, RULE_shiftOption = 103, RULE_bfc = 104, 
+		RULE_bfi = 105, RULE_lsb = 106, RULE_width = 107, RULE_opsh = 108, RULE_sh = 109, 
 		RULE_offset = 110, RULE_imm16 = 111, RULE_imm12 = 112, RULE_imm8m = 113, 
 		RULE_label = 114, RULE_data = 115, RULE_asciz = 116, RULE_number = 117;
 	public static final String[] ruleNames = {
@@ -71,7 +71,7 @@ public class ProcessorParser extends Parser {
 		"bl", "ldr", "ldrb", "ldrh", "str", "strb", "strh", "memoryAddress", "immediateOffset", 
 		"postIndexedImmediate", "registerOffset", "postIndexedRegister", "push", 
 		"pop", "regList", "rd", "rn", "rm", "rs", "operand2", "registerShiftedByRegister", 
-		"registerShiftedByConstant", "shiftOption", "bfi", "bfc", "lsb", "width", 
+		"registerShiftedByConstant", "shiftOption", "bfc", "bfi", "lsb", "width", 
 		"opsh", "sh", "offset", "imm16", "imm12", "imm8m", "label", "data", "asciz", 
 		"number"
 	};
@@ -86,7 +86,7 @@ public class ProcessorParser extends Parser {
 		"'bic'", "'bics'", "'rbit'", "'b'", "'beq'", "'bne'", "'bcs'", "'bhs'", 
 		"'bcc'", "'blo'", "'bmi'", "'bpl'", "'bvs'", "'bvc'", "'bhi'", "'bls'", 
 		"'bge'", "'blt'", "'bgt'", "'ble'", "'bal'", "'bl'", "'ldr'", "'ldrb'", 
-		"'ldrh'", "'str'", "'strb'", "'strh'", "'push'", "'pop'", "'bfi'", "'bfc'", 
+		"'ldrh'", "'str'", "'strb'", "'strh'", "'push'", "'pop'", "'bfc'", "'bfi'", 
 		"'.asciz'", null, "'pc'", "'lr'", null, null, null, null, "'\"'", "':'", 
 		"'{'", "'}'", "'='", "'['", "']'", "'#'", "','"
 	};
@@ -1614,14 +1614,14 @@ public class ProcessorParser extends Parser {
 			setState(360);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__78:
+			case T__77:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(358);
 				bfc();
 				}
 				break;
-			case T__77:
+			case T__78:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(359);
@@ -6374,6 +6374,62 @@ public class ProcessorParser extends Parser {
 		return _localctx;
 	}
 
+	public static class BfcContext extends ParserRuleContext {
+		public RdContext rd() {
+			return getRuleContext(RdContext.class,0);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(ProcessorParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(ProcessorParser.COMMA, i);
+		}
+		public LsbContext lsb() {
+			return getRuleContext(LsbContext.class,0);
+		}
+		public WidthContext width() {
+			return getRuleContext(WidthContext.class,0);
+		}
+		public BfcContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_bfc; }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ProcessorVisitor ) return ((ProcessorVisitor<? extends T>)visitor).visitBfc(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final BfcContext bfc() throws RecognitionException {
+		BfcContext _localctx = new BfcContext(_ctx, getState());
+		enterRule(_localctx, 208, RULE_bfc);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(887);
+			match(T__77);
+			setState(888);
+			rd();
+			setState(889);
+			match(COMMA);
+			setState(890);
+			lsb();
+			setState(891);
+			match(COMMA);
+			setState(892);
+			width();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
 	public static class BfiContext extends ParserRuleContext {
 		public RdContext rd() {
 			return getRuleContext(RdContext.class,0);
@@ -6404,74 +6460,18 @@ public class ProcessorParser extends Parser {
 
 	public final BfiContext bfi() throws RecognitionException {
 		BfiContext _localctx = new BfiContext(_ctx, getState());
-		enterRule(_localctx, 208, RULE_bfi);
+		enterRule(_localctx, 210, RULE_bfi);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(887);
-			match(T__77);
-			setState(888);
-			rd();
-			setState(889);
-			match(COMMA);
-			setState(890);
-			rn();
-			setState(891);
-			match(COMMA);
-			setState(892);
-			lsb();
-			setState(893);
-			match(COMMA);
 			setState(894);
-			width();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class BfcContext extends ParserRuleContext {
-		public RdContext rd() {
-			return getRuleContext(RdContext.class,0);
-		}
-		public List<TerminalNode> COMMA() { return getTokens(ProcessorParser.COMMA); }
-		public TerminalNode COMMA(int i) {
-			return getToken(ProcessorParser.COMMA, i);
-		}
-		public LsbContext lsb() {
-			return getRuleContext(LsbContext.class,0);
-		}
-		public WidthContext width() {
-			return getRuleContext(WidthContext.class,0);
-		}
-		public BfcContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_bfc; }
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ProcessorVisitor ) return ((ProcessorVisitor<? extends T>)visitor).visitBfc(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final BfcContext bfc() throws RecognitionException {
-		BfcContext _localctx = new BfcContext(_ctx, getState());
-		enterRule(_localctx, 210, RULE_bfc);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(896);
 			match(T__78);
-			setState(897);
+			setState(895);
 			rd();
+			setState(896);
+			match(COMMA);
+			setState(897);
+			rn();
 			setState(898);
 			match(COMMA);
 			setState(899);
@@ -7005,7 +7005,7 @@ public class ProcessorParser extends Parser {
 		"\3\\\3]\3]\3]\3]\3]\3]\5]\u0342\n]\3]\3]\3^\3^\3^\3^\3^\3^\3^\5^\u034d"+
 		"\n^\3_\3_\3_\3`\3`\3`\3a\3a\3a\3a\7a\u0359\na\fa\16a\u035c\13a\3a\3a\3"+
 		"b\3b\3c\3c\3d\3d\3e\3e\3f\3f\3f\3f\5f\u036c\nf\3g\3g\3g\3g\3g\3h\3h\3"+
-		"h\3h\3h\3i\3i\3j\3j\3j\3j\3j\3j\3j\3j\3j\3k\3k\3k\3k\3k\3k\3k\3l\3l\3"+
+		"h\3h\3h\3i\3i\3j\3j\3j\3j\3j\3j\3j\3k\3k\3k\3k\3k\3k\3k\3k\3k\3l\3l\3"+
 		"m\3m\3n\3n\3n\3o\3o\3p\3p\3q\3q\3r\3r\3s\3s\3t\3t\3t\3u\3u\3u\3u\3v\3"+
 		"v\3v\3w\5w\u03a6\nw\3w\3w\3w\2\2x\2\4\6\b\n\f\16\20\22\24\26\30\32\34"+
 		"\36 \"$&(*,.\60\62\64\668:<>@BDFHJLNPRTVXZ\\^`bdfhjlnprtvxz|~\u0080\u0082"+
@@ -7040,7 +7040,7 @@ public class ProcessorParser extends Parser {
 		"\u0351\3\2\2\2\u00c0\u0354\3\2\2\2\u00c2\u035f\3\2\2\2\u00c4\u0361\3\2"+
 		"\2\2\u00c6\u0363\3\2\2\2\u00c8\u0365\3\2\2\2\u00ca\u036b\3\2\2\2\u00cc"+
 		"\u036d\3\2\2\2\u00ce\u0372\3\2\2\2\u00d0\u0377\3\2\2\2\u00d2\u0379\3\2"+
-		"\2\2\u00d4\u0382\3\2\2\2\u00d6\u0389\3\2\2\2\u00d8\u038b\3\2\2\2\u00da"+
+		"\2\2\u00d4\u0380\3\2\2\2\u00d6\u0389\3\2\2\2\u00d8\u038b\3\2\2\2\u00da"+
 		"\u038d\3\2\2\2\u00dc\u0390\3\2\2\2\u00de\u0392\3\2\2\2\u00e0\u0394\3\2"+
 		"\2\2\u00e2\u0396\3\2\2\2\u00e4\u0398\3\2\2\2\u00e6\u039a\3\2\2\2\u00e8"+
 		"\u039d\3\2\2\2\u00ea\u03a1\3\2\2\2\u00ec\u03a5\3\2\2\2\u00ee\u00f0\5\4"+
@@ -7101,8 +7101,8 @@ public class ProcessorParser extends Parser {
 		"\5\u00b0Y\2\u0162\u015c\3\2\2\2\u0162\u015d\3\2\2\2\u0162\u015e\3\2\2"+
 		"\2\u0162\u015f\3\2\2\2\u0162\u0160\3\2\2\2\u0162\u0161\3\2\2\2\u0163\31"+
 		"\3\2\2\2\u0164\u0167\5\u00bc_\2\u0165\u0167\5\u00be`\2\u0166\u0164\3\2"+
-		"\2\2\u0166\u0165\3\2\2\2\u0167\33\3\2\2\2\u0168\u016b\5\u00d4k\2\u0169"+
-		"\u016b\5\u00d2j\2\u016a\u0168\3\2\2\2\u016a\u0169\3\2\2\2\u016b\35\3\2"+
+		"\2\2\u0166\u0165\3\2\2\2\u0167\33\3\2\2\2\u0168\u016b\5\u00d2j\2\u0169"+
+		"\u016b\5\u00d4k\2\u016a\u0168\3\2\2\2\u016a\u0169\3\2\2\2\u016b\35\3\2"+
 		"\2\2\u016c\u016d\7\4\2\2\u016d\u016e\5\u00c2b\2\u016e\u016f\7b\2\2\u016f"+
 		"\u0170\5\u00c4c\2\u0170\u0173\7b\2\2\u0171\u0174\5\u00e2r\2\u0172\u0174"+
 		"\5\u00caf\2\u0173\u0171\3\2\2\2\u0173\u0172\3\2\2\2\u0174\37\3\2\2\2\u0175"+
@@ -7261,11 +7261,11 @@ public class ProcessorParser extends Parser {
 		"\5\u00c8e\2\u0371\u00cd\3\2\2\2\u0372\u0373\5\u00c6d\2\u0373\u0374\7b"+
 		"\2\2\u0374\u0375\5\u00d0i\2\u0375\u0376\5\u00ecw\2\u0376\u00cf\3\2\2\2"+
 		"\u0377\u0378\t\4\2\2\u0378\u00d1\3\2\2\2\u0379\u037a\7P\2\2\u037a\u037b"+
-		"\5\u00c2b\2\u037b\u037c\7b\2\2\u037c\u037d\5\u00c4c\2\u037d\u037e\7b\2"+
-		"\2\u037e\u037f\5\u00d6l\2\u037f\u0380\7b\2\2\u0380\u0381\5\u00d8m\2\u0381"+
-		"\u00d3\3\2\2\2\u0382\u0383\7Q\2\2\u0383\u0384\5\u00c2b\2\u0384\u0385\7"+
-		"b\2\2\u0385\u0386\5\u00d6l\2\u0386\u0387\7b\2\2\u0387\u0388\5\u00d8m\2"+
-		"\u0388\u00d5\3\2\2\2\u0389\u038a\5\u00ecw\2\u038a\u00d7\3\2\2\2\u038b"+
+		"\5\u00c2b\2\u037b\u037c\7b\2\2\u037c\u037d\5\u00d6l\2\u037d\u037e\7b\2"+
+		"\2\u037e\u037f\5\u00d8m\2\u037f\u00d3\3\2\2\2\u0380\u0381\7Q\2\2\u0381"+
+		"\u0382\5\u00c2b\2\u0382\u0383\7b\2\2\u0383\u0384\5\u00c4c\2\u0384\u0385"+
+		"\7b\2\2\u0385\u0386\5\u00d6l\2\u0386\u0387\7b\2\2\u0387\u0388\5\u00d8"+
+		"m\2\u0388\u00d5\3\2\2\2\u0389\u038a\5\u00ecw\2\u038a\u00d7\3\2\2\2\u038b"+
 		"\u038c\5\u00ecw\2\u038c\u00d9\3\2\2\2\u038d\u038e\7\36\2\2\u038e\u038f"+
 		"\5\u00dco\2\u038f\u00db\3\2\2\2\u0390\u0391\5\u00ecw\2\u0391\u00dd\3\2"+
 		"\2\2\u0392\u0393\5\u00ecw\2\u0393\u00df\3\2\2\2\u0394\u0395\5\u00ecw\2"+

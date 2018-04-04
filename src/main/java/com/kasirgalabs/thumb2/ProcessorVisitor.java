@@ -635,17 +635,17 @@ public interface ProcessorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitShiftOption(ProcessorParser.ShiftOptionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ProcessorParser#bfi}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBfi(ProcessorParser.BfiContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link ProcessorParser#bfc}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitBfc(ProcessorParser.BfcContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link ProcessorParser#bfi}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBfi(ProcessorParser.BfiContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ProcessorParser#lsb}.
 	 * @param ctx the parse tree
