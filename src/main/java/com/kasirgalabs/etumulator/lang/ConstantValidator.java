@@ -20,9 +20,10 @@ import com.kasirgalabs.etumulator.visitor.Shift;
 import com.kasirgalabs.thumb2.AssemblerBaseVisitor;
 import com.kasirgalabs.thumb2.AssemblerLexer;
 import com.kasirgalabs.thumb2.AssemblerParser;
-import java.math.BigInteger;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+
+import java.math.BigInteger;
 
 public final class ConstantValidator extends AssemblerBaseVisitor<Integer> {
     private ConstantValidator() {
@@ -117,6 +118,18 @@ public final class ConstantValidator extends AssemblerBaseVisitor<Integer> {
                     + ": the sum of lsb and width cannot exceed the value of 32");
         }
         return visitChildren(ctx);
+    }
+
+    @Override
+    public Integer visitBfi(AssemblerParser.BfiContext ctx) {
+        int lsb = visitNumber(ctx.lsb().number());
+        int width = visitNumber(ctx.width().number());
+        int maxLength = 32;
+        if (lsb + width > maxLength) {
+            throw new NumberFormatException("Number error on line " + ctx.start.getLine()
+                    + ": the sum of lsb and width cannot exceed the value of 32");
+        }
+        return null;
     }
 
     @Override
