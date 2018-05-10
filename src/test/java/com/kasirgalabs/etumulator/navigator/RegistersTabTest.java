@@ -16,7 +16,6 @@
  */
 package com.kasirgalabs.etumulator.navigator;
 
-import com.kasirgalabs.etumulator.document.BaseDocumentTest;
 import com.kasirgalabs.etumulator.processor.LR;
 import com.kasirgalabs.etumulator.processor.PC;
 import com.kasirgalabs.etumulator.processor.RegisterFile;
@@ -52,7 +51,7 @@ public class RegistersTabTest {
             lr = new LR(new GUISafeDispatcher());
             navigator = new Navigator();
             registersTab = new RegistersTab(registerFile, pc, lr, navigator);
-            ClassLoader classLoader = BaseDocumentTest.class.getClassLoader();
+            ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader fxmlLoader
                     = new FXMLLoader(classLoader.getResource("fxml/RegistersTab.fxml"));
             fxmlLoader.setControllerFactory((Class<?> param) -> {

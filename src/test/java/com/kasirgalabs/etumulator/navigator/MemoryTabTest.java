@@ -16,7 +16,6 @@
  */
 package com.kasirgalabs.etumulator.navigator;
 
-import com.kasirgalabs.etumulator.document.BaseDocumentTest;
 import com.kasirgalabs.etumulator.processor.Memory;
 import com.kasirgalabs.etumulator.processor.Memory.Size;
 import com.kasirgalabs.etumulator.util.GUISafeDispatcher;
@@ -46,7 +45,7 @@ public class MemoryTabTest {
             memory = new Memory(new GUISafeDispatcher());
             navigator = new Navigator();
             memoryTab = new MemoryTab(memory, navigator);
-            ClassLoader classLoader = BaseDocumentTest.class.getClassLoader();
+            ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader fxmlLoader = new FXMLLoader(classLoader.getResource("fxml/MemoryTab.fxml"));
             fxmlLoader.setControllerFactory((Class<?> param) -> {
                 return memoryTab;

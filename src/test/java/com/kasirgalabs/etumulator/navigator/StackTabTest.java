@@ -16,7 +16,6 @@
  */
 package com.kasirgalabs.etumulator.navigator;
 
-import com.kasirgalabs.etumulator.document.BaseDocumentTest;
 import com.kasirgalabs.etumulator.processor.Stack;
 import com.kasirgalabs.etumulator.util.GUISafeDispatcher;
 import java.io.IOException;
@@ -47,7 +46,7 @@ public class StackTabTest {
             stack = new Stack(new GUISafeDispatcher());
             navigator = new Navigator();
             stackTab = new StackTab(stack, navigator);
-            ClassLoader classLoader = BaseDocumentTest.class.getClassLoader();
+            ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader fxmlLoader = new FXMLLoader(classLoader.getResource("fxml/StackTab.fxml"));
             fxmlLoader.setControllerFactory((Class<?> param) -> {
                 return stackTab;

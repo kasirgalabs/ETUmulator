@@ -16,7 +16,6 @@
  */
 package com.kasirgalabs.etumulator.navigator;
 
-import com.kasirgalabs.etumulator.document.BaseDocumentTest;
 import com.kasirgalabs.etumulator.processor.APSR;
 import com.kasirgalabs.etumulator.util.GUISafeDispatcher;
 import java.io.IOException;
@@ -44,7 +43,7 @@ public class APSRStatusTest {
         FutureTask<Void> futureTask = new FutureTask<>(() -> {
             apsr = new APSR(new GUISafeDispatcher());
             apsrStatus = new APSRStatus(apsr);
-            ClassLoader classLoader = BaseDocumentTest.class.getClassLoader();
+            ClassLoader classLoader = getClass().getClassLoader();
             FXMLLoader fxmlLoader = new FXMLLoader(classLoader.getResource("fxml/APSRStatus.fxml"));
             fxmlLoader.setControllerFactory((Class<?> param) -> {
                 return apsrStatus;
