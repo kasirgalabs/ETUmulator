@@ -14,6 +14,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,22 +63,22 @@ public class FileMenuController {
     }
 
     @FXML
-    public void openBranchExampleOnAction(ActionEvent event) throws IOException {
-        File file = new File("BranchExample");
-        takeFileToText(file);
+    public void openBranchExampleOnAction(ActionEvent event) throws URISyntaxException {
+        URL url = getClass().getClassLoader().getResource("examples/BranchExample");
+        takeFileToText(new File(url.toURI()));
 
     }
 
     @FXML
-    public void openLoopExampleOnAction(ActionEvent event) throws IOException {
-        File file = new File("LoopExample");
-        takeFileToText(file);
+    public void openLoopExampleOnAction(ActionEvent event) throws URISyntaxException {
+        URL url = getClass().getClassLoader().getResource("examples/LoopExample");
+        takeFileToText(new File(url.toURI()));
     }
 
     @FXML
-    public void openStackExampleOnAction(ActionEvent event) throws IOException {
-        File file = new File("StackExample");
-        takeFileToText(file);
+    public void openStackExampleOnAction(ActionEvent event) throws URISyntaxException {
+        URL url = getClass().getClassLoader().getResource("examples/StackExample");
+        takeFileToText(new File(url.toURI()));
     }
 
     @FXML
